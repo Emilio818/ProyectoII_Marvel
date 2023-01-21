@@ -8,13 +8,13 @@ import java.awt.Image;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import logicadenegocios.Cliente;
 
+import logicadenegocios.Personaje;
 import logicadenegocios.ServidorLocal;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -22,25 +22,32 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author emifu
  */
-public class D_JuegoServidor extends javax.swing.JFrame {
+public class D_JuegoCliente extends javax.swing.JFrame {
+    private String host = "192.168.0.8";
+    private static int puerto;
+    private Personaje personaje;
     
-    static ServerSocket ss;
     static Socket s;
     static DataInputStream din;
     static DataOutputStream dout;
     
+    public D_JuegoCliente(int puerto) {
+        D_JuegoCliente.puerto = puerto;
+        initComponents();
+        this.setLocationRelativeTo(null);
+        panelChat.setVisible(false);
+    }   
+    
+
+            
+            
+
+    
     /**
      * Creates new form Escenario
      */
-    public D_JuegoServidor() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        
-        panelChat.setVisible(false);
-        ponerSprites();
-        
-        
-    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,11 +188,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
 
     private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
         try{
-            String msgout="";
-            msgout=msg_text.getText().trim();
+            String msgout;
+            msgout = msg_text.getText().trim();
             dout.writeUTF(msgout);
         }catch(IOException e){
-            
+            System.out.println(e);
         }
     }//GEN-LAST:event_msg_sendActionPerformed
 
@@ -218,35 +225,29 @@ public class D_JuegoServidor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(D_JuegoServidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(D_JuegoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new D_JuegoServidor().setVisible(true);
+                new D_JuegoCliente(0).setVisible(true);
             }
         });
-        String msgin = "";
         try{
-            ss = new ServerSocket(5000);
-            s = ss.accept();
-            System.out.println("ConexionLograda");
-            
+            s = new Socket("192.168.0.3",puerto);
             din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
+            String msgin="";
             
             while(!msgin.equals("exit")){
-              msgin = din.readUTF();
-              msg_area.setText(msg_area.getText().trim()+"\n"+msgin);
+                msgin = din.readUTF();
+                msg_area.setText(msg_area.getText().trim()+"\n Server\t"+msgin);
             }
-        
-        }catch (IOException ex) {
+        }catch (IOException e){
+            System.out.println(e);
         }
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -274,12 +275,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private javax.swing.JPanel slotPersonaje2;
     // End of variables declaration//GEN-END:variables
 
-
-    private void ponerSprites() {
-      /*  System.out.println(ControlJuego.personaje1);
+    /*private void ponerSprites() {
+        System.out.println(ControlJuego.personaje1);
         System.out.println(ControlJuego.personaje2);
-        SpritePersonaje personaje1 = new SpritePersonaje(ControlJuego.personaje1,"1");
-        SpritePersonaje personaje2 = new SpritePersonaje(ControlJuego.personaje2,"2");
+        SpritePersonaje personaje1 = new SpritePersonaje( ControlJuego.personaje1,"1");
+        SpritePersonaje personaje2 = new SpritePersonaje( ControlJuego.personaje2,"2");
         
         personaje1.setSize(300, 300);
         personaje2.setSize(300, 300);
@@ -293,7 +293,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         slotPersonaje2.revalidate();
         slotPersonaje1.repaint();
         slotPersonaje2.repaint();
-        // Fondo Correspondiente*/
-    
-    }
+    }*/
+
 }

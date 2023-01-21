@@ -37,6 +37,8 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
     public C_GestionHeroesAux(char modo) {
         this.modo = modo;
         initComponents();
+        this.setLocationRelativeTo(null);
+        
         inputTipoDeClase.setModel(new DefaultComboBoxModel<>(TipoDeClase.values()));
         inputTipoDePersonaje.setModel(new DefaultComboBoxModel<>(TipoDePersonaje.values()));  
         if (modo == 'a'){

@@ -15,6 +15,7 @@ public class E_Victoria extends javax.swing.JFrame {
      */
     public E_Victoria() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

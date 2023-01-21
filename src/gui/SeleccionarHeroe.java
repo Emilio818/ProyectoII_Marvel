@@ -21,7 +21,7 @@ import static logicadenegocios.TipoDePersonaje.VILLANO;
  */
 public class SeleccionarHeroe extends javax.swing.JFrame {
     
-    private ServidorLocal servidor;
+    private String tipo;
     private javax.swing.JPanel slotSeleccionado = null;
     public static int slotSeleccionadoNum = -1;
     private ArrayList<Personaje> personajes;
@@ -38,10 +38,10 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     
     /**
      * Creates new form I_MenuInicio
-     * @param servidor
+     * @param tipo
      */
-    public SeleccionarHeroe(ServidorLocal servidor) {
-        this.servidor = servidor;
+    public SeleccionarHeroe(String tipo) {
+        this.tipo = tipo;
         this.personajes = new ArrayList<>();
         this.slotsOcupados = new ArrayList<>();
         this.slotsVacios = new ArrayList<>();
@@ -51,8 +51,9 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         this.stats = new ArrayList<>();
         this.poderes = new ArrayList<>();
         this.imagenes = new ArrayList<>();        
-        
         initComponents();
+        this.setLocationRelativeTo(null);
+        
         llenarListaObjetos();
         vaciarSlots();
         actualizarSlots();
@@ -159,7 +160,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         slotStats10 = new javax.swing.JLabel();
         slotPoder10 = new javax.swing.JLabel();
         slotImagen10 = new javax.swing.JLabel();
-        botonAgregar = new javax.swing.JButton();
+        botonSeleccionar = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -546,13 +547,13 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
 
         fondo.add(slotPersonaje10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, -1, -1));
 
-        botonAgregar.setText("Seleccionar");
-        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
+        botonSeleccionar.setText("Seleccionar");
+        botonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarActionPerformed(evt);
+                botonSeleccionarActionPerformed(evt);
             }
         });
-        fondo.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, -1));
+        fondo.add(botonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, -1));
 
         botonGuardar.setText("Regresar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -570,9 +571,19 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+    private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
+        if ( tipo.equals("Servidor")){  
+            D_JuegoServidor ph = new D_JuegoServidor();
+            ph.setVisible(true);
+            
+        } else {
+            D_JuegoCliente jc = new D_JuegoCliente( B_Servidores.puertoSeleccionado);
+            jc.setVisible(true);
+            
+        }     
+        this.dispose();
         
-    }//GEN-LAST:event_botonAgregarActionPerformed
+    }//GEN-LAST:event_botonSeleccionarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         // TODO add your handling code here:
@@ -698,8 +709,8 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonSeleccionar;
     private java.awt.Panel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel slotClase1;
@@ -798,7 +809,6 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         personajes = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
         ImageIcon mIcono = null;
         for (int i = 0; i < personajes.size(); i++){
-            System.out.println(personajes.get(i).getpDatosPersonales().getpCiudad());
             if (personajes.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals((SeleccionarHeroe.ciudad.getCiudad()))){
                 slotsOcupados.get(i).setVisible(true);
                 slotsOcupados.get(i).setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));  

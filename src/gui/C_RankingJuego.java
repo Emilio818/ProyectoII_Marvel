@@ -15,6 +15,7 @@ public class C_RankingJuego extends javax.swing.JFrame {
      */
     public C_RankingJuego() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

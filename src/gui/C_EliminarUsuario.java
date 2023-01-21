@@ -20,6 +20,7 @@ public class C_EliminarUsuario extends javax.swing.JFrame {
      */
     public C_EliminarUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
         llenarTabla();
         
     }

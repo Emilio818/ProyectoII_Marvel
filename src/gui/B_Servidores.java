@@ -7,6 +7,7 @@ package gui;
 import aplicacion.ManejoJSON;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import logicadenegocios.Cliente;
 import logicadenegocios.ServidorLocal;
 import logicadenegocios.Usuario;
 
@@ -15,12 +16,14 @@ import logicadenegocios.Usuario;
  * @author Ginge
  */
 public class B_Servidores extends javax.swing.JFrame {
+    public static int puertoSeleccionado;
     DefaultTableModel modelo;
     /**
      * Creates new form Servidores
      */
     public B_Servidores() {
         initComponents();
+        this.setLocationRelativeTo(null);
         llenarTabla();
     }
 
@@ -39,7 +42,7 @@ public class B_Servidores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         salir = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        labelUnirsePartida = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         atras = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -114,10 +117,15 @@ public class B_Servidores extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Unirse A Partida");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 40));
+        labelUnirsePartida.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
+        labelUnirsePartida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelUnirsePartida.setText("Unirse A Partida");
+        labelUnirsePartida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                unirsePartidaMouseClicked(evt);
+            }
+        });
+        jPanel2.add(labelUnirsePartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 270, 40));
 
@@ -161,6 +169,18 @@ public class B_Servidores extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_atrasMouseClicked
 
+    private void unirsePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unirsePartidaMouseClicked
+        ArrayList<ServidorLocal> servidores = ManejoJSON.leerJSON(ServidorLocal.RUTA, ServidorLocal.class);
+        ServidorLocal servidorLocal = servidores.get(tabla.getSelectedRow());
+        B_Servidores.puertoSeleccionado = servidorLocal.getPuerto();
+        SeleccionarHeroe.ciudad = servidorLocal.getCiudad();
+        Cliente cliente = new Cliente();
+        SeleccionarHeroe sh = new SeleccionarHeroe("Cliente");
+        sh.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_unirsePartidaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -203,11 +223,11 @@ public class B_Servidores extends javax.swing.JFrame {
     private javax.swing.JLabel atras;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelUnirsePartida;
     private javax.swing.JLabel salir;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

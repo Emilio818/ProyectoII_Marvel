@@ -204,12 +204,13 @@ public class B_CrearPartida extends javax.swing.JFrame {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.now();
         String strDate = dateTime.format(dateFormat);
-        ServidorLocal servidor = new ServidorLocal(nombre, ciudad, strDate);
+        ArrayList servidores = ManejoJSON.leerJSON(ServidorLocal.RUTA, ServidorLocal.class);
+        ServidorLocal servidor = new ServidorLocal(nombre, ciudad, strDate, 5000 + servidores.size() );
+        SeleccionarHeroe sh = new SeleccionarHeroe("Servidor");
         ManejoJSON.guardarJSON(servidor, ServidorLocal.RUTA);
-        
-        SeleccionarHeroe sh = new SeleccionarHeroe(servidor);
         sh.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
+        
         
     }//GEN-LAST:event_crearServidorMouseClicked
 

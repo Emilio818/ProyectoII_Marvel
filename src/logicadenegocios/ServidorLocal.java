@@ -1,12 +1,17 @@
 
 package logicadenegocios;
 
+import gui.D_JuegoServidor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,27 +21,17 @@ public class ServidorLocal {
     private String nombre;
     private Ciudad ciudad;
     private String fechaCreacion;
-    private static int puerto = 5000;
+    private int puerto;
+    
+ 
     public static final File RUTA = new File("baseDatos/Servidores.json");
     
-    /*
-    private ServerSocket ss;
-    private Socket s;
-    private DataInputStream din;
-    private DataOutputStream dout;
-    */
-    public ServidorLocal(String nombre, Ciudad ciudad, String fechaCreacion) { //, ServerSocket ss, Socket s, DataInputStream din, DataOutputStream dout
+    public ServidorLocal(String nombre, Ciudad ciudad, String fechaCreacion, int puerto) { 
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.fechaCreacion = fechaCreacion;
-        ServidorLocal.puerto ++;
-        
-        /*
-        this.ss = ss;
-        this.s = s;
-        this.din = din;
-        this.dout = dout;
-        */
+        this.puerto = puerto;
+ 
     }
 
     public String getNombre() {
@@ -62,38 +57,14 @@ public class ServidorLocal {
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-/*
-    public ServerSocket getSs() {
-        return ss;
+
+    public int getPuerto() {
+        return puerto;
     }
 
-    public void setSs(ServerSocket ss) {
-        this.ss = ss;
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
     }
 
-    public Socket getS() {
-        return s;
-    }
-
-    public void setS(Socket s) {
-        this.s = s;
-    }
-
-    public DataInputStream getDin() {
-        return din;
-    }
-
-    public void setDin(DataInputStream din) {
-        this.din = din;
-    }
-
-    public DataOutputStream getDout() {
-        return dout;
-    }
-
-    public void setDout(DataOutputStream dout) {
-        this.dout = dout;
-    }
-  */  
     
 }

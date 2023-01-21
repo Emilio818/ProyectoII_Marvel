@@ -37,6 +37,8 @@ public class SeleccionarCiudad extends javax.swing.JFrame {
         this.imagenes = new ArrayList<>();        
         
         initComponents();
+        this.setLocationRelativeTo(null);
+        
         llenarListaObjetos();
         vaciarSlots();
         actualizarSlots();
@@ -466,12 +468,14 @@ public class SeleccionarCiudad extends javax.swing.JFrame {
 
     private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
         if (slotSeleccionadoNum != -1){
+            B_CrearPartida.inputCiudad.setText(ciudades.get(slotSeleccionadoNum).getCiudad());
+            SeleccionarHeroe.ciudad = (ciudades.get(slotSeleccionadoNum));
             cp.setVisible(true);
             this.dispose();
         } else{
             JOptionPane.showMessageDialog(null, "Seleccione una Ciudad");
         }
-        B_CrearPartida.inputCiudad.setText(ciudades.get(slotSeleccionadoNum).getCiudad());
+        
     }//GEN-LAST:event_botonSeleccionarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed

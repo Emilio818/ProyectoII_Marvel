@@ -15,6 +15,7 @@ public class C_RankingUsuario extends javax.swing.JFrame {
      */
     public C_RankingUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

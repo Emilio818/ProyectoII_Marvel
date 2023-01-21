@@ -54,6 +54,7 @@ public class C_GestionHeroes extends javax.swing.JFrame {
         llenarListaObjetos();
         vaciarSlots();
         actualizarSlots();
+        this.setLocationRelativeTo(null);
     }
 
     /**
