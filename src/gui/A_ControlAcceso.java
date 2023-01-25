@@ -47,6 +47,7 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         salir = new javax.swing.JLabel();
         txtusuarioObligatorio = new javax.swing.JLabel();
         LOGO = new javax.swing.JLabel();
+        txtcontraseñaObligatoria = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +70,11 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         inputUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inputUsuarioMouseClicked(evt);
+            }
+        });
+        inputUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputUsuarioActionPerformed(evt);
             }
         });
         panelblanco.add(inputUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 20));
@@ -105,6 +111,11 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
         inputContraseña.setForeground(new java.awt.Color(204, 204, 204));
         inputContraseña.setBorder(null);
+        inputContraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContraseñaFocusLost(evt);
+            }
+        });
         panelblanco.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, 30));
 
         ingresar.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
@@ -139,13 +150,18 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         });
         panelblanco.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 50, 50));
 
-        txtusuarioObligatorio.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        txtusuarioObligatorio.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         txtusuarioObligatorio.setForeground(new java.awt.Color(204, 0, 0));
         txtusuarioObligatorio.setText("* Usuario Obligatorio");
         panelblanco.add(txtusuarioObligatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, 20));
 
         LOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/logoMarvel.png"))); // NOI18N
         panelblanco.add(LOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        txtcontraseñaObligatoria.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txtcontraseñaObligatoria.setForeground(new java.awt.Color(204, 0, 0));
+        txtcontraseñaObligatoria.setText("* Contraseña Obligatorio");
+        panelblanco.add(txtcontraseñaObligatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
 
         getContentPane().add(panelblanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 340, 500));
 
@@ -223,6 +239,14 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputUsuarioFocusLost
 
+    private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputUsuarioActionPerformed
+
+    private void inputContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContraseñaFocusLost
+        
+    }//GEN-LAST:event_inputContraseñaFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -270,6 +294,7 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     private javax.swing.JLabel registroUsuario;
     private javax.swing.JLabel salir;
     private javax.swing.ButtonGroup tipoUsuario;
+    private javax.swing.JLabel txtcontraseñaObligatoria;
     private javax.swing.JLabel txtusuarioObligatorio;
     // End of variables declaration//GEN-END:variables
 }
