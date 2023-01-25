@@ -63,7 +63,6 @@ public class SpritePersonaje extends javax.swing.JPanel {
         int altura = (foto.getHeight(this));
         int ancho = foto.getWidth(this);
         if ("1".equals(numJugador)){
-            System.out.println("Hola");
             g2D.drawImage(foto, 0, 300 - altura, ancho, altura, null);
         } else {
             g2D.drawImage(foto, 0 + ancho, 300 - altura, -ancho, altura, null);

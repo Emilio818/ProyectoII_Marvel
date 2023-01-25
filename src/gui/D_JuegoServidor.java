@@ -36,7 +36,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        panelChat.setVisible(false);
+        PanelChatServidor chat = new PanelChatServidor();
+        chat.setSize(360, 180);
+        chat.setLocation(0, 0);
+        chat.setVisible(false);
+        
         ponerSprites();
         
         
@@ -51,11 +55,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private void initComponents() {
 
         panelbg = new java.awt.Panel();
-        panelChat = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        msg_area = new javax.swing.JTextArea();
-        msg_text = new javax.swing.JTextField();
-        msg_send = new javax.swing.JButton();
         slotPersonaje1 = new javax.swing.JPanel();
         slotPersonaje2 = new javax.swing.JPanel();
         infoPersonaje1 = new javax.swing.JPanel();
@@ -81,33 +80,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         panelbg.setName(""); // NOI18N
         panelbg.setPreferredSize(new java.awt.Dimension(900, 500));
         panelbg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelChat.setOpaque(false);
-        panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        msg_area.setColumns(20);
-        msg_area.setRows(5);
-        jScrollPane1.setViewportView(msg_area);
-
-        panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
-
-        msg_text.setText("Escribe algo . . .");
-        msg_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_textActionPerformed(evt);
-            }
-        });
-        panelChat.add(msg_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
-
-        msg_send.setText("Enviar");
-        msg_send.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_sendActionPerformed(evt);
-            }
-        });
-        panelChat.add(msg_send, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
-
-        panelbg.add(panelChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 360, 180));
 
         slotPersonaje1.setOpaque(false);
         slotPersonaje1.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -179,20 +151,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
-        try{
-            String msgout="";
-            msgout=msg_text.getText().trim();
-            dout.writeUTF(msgout);
-        }catch(IOException e){
-            
-        }
-    }//GEN-LAST:event_msg_sendActionPerformed
-
-    private void msg_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_textActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_msg_textActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (panelChat.isVisible()){
             panelChat.setVisible(false);
@@ -259,22 +217,20 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBg;
     private javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelNombre2;
     private javax.swing.JLabel labelVida;
     private javax.swing.JLabel labelVida1;
-    private static javax.swing.JTextArea msg_area;
-    private javax.swing.JButton msg_send;
-    private javax.swing.JTextField msg_text;
-    private javax.swing.JPanel panelChat;
     private java.awt.Panel panelbg;
     private javax.swing.JPanel slotPersonaje1;
     private javax.swing.JPanel slotPersonaje2;
     // End of variables declaration//GEN-END:variables
 
 
+    private void panelChat(){
+        
+    }
     private void ponerSprites() {
       /*  System.out.println(ControlJuego.personaje1);
         System.out.println(ControlJuego.personaje2);
