@@ -33,6 +33,8 @@ public class Main {
         Employee employee = gson.fromJson(json, Employee.class);
         */
         
+        
+        System.out.println("Hola Chechita guapa");
         //Ciudad ciudad1 = new Ciudad("Honduras", "Barcelona", "Barcelina", Escenario.CIUDAD);
         //Ciudad ciudad2 = new Ciudad("Mongolia", "Barcelona", "Barcelina", Escenario.CIUDAD);
         //ManejoJSON.guardarJSON(ciudad1, Ciudad.RUTA);
