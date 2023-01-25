@@ -5,6 +5,7 @@ import aplicacion.ManejoJSON;
 import java.util.ArrayList;
 import logicadenegocios.Escenario;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import logicadenegocios.*;
 /**
  *
@@ -67,7 +68,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputPais.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputPais.setForeground(new java.awt.Color(153, 153, 153));
-        inputPais.setText("Ingrese el país");
         inputPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputPaisActionPerformed(evt);
@@ -83,7 +83,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputEstado.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputEstado.setForeground(new java.awt.Color(153, 153, 153));
-        inputEstado.setText("Ingrese el estado");
         inputEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEstadoActionPerformed(evt);
@@ -105,7 +104,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputCiudad.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputCiudad.setForeground(new java.awt.Color(153, 153, 153));
-        inputCiudad.setText("Ingrese la ciudad");
         inputCiudad.setDoubleBuffered(true);
         inputCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +173,19 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEscenarioActionPerformed
 
     private void ConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmarMouseClicked
+        if(inputPais.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el país", "Error", JOptionPane.WARNING_MESSAGE);         
+            
+        }else if (inputCiudad.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);         
+        }else if (inputEstado.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE); 
+        }else{
+            
+            
+        }
+        
+        
         Ciudad ciudad = getInformacion();
         if (modo == 'a'){
             ManejoJSON.guardarJSON(ciudad, Ciudad.RUTA);

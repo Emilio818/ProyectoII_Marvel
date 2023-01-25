@@ -540,6 +540,11 @@ public class B_GestionCiudades extends javax.swing.JFrame {
         regresar.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         regresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         regresar.setText("Regresar");
+        regresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                regresarMouseClicked(evt);
+            }
+        });
         jPanel7.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 20));
 
         fondo.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 470, 110, 20));
@@ -659,7 +664,9 @@ public class B_GestionCiudades extends javax.swing.JFrame {
     }//GEN-LAST:event_clickSlot10
 
     private void agregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregar1MouseClicked
-        // TODO add your handling code here:
+        B_GestionCiudadesAux nf = new B_GestionCiudadesAux('a');
+        nf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_agregar1MouseClicked
 
     private void modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMouseClicked
@@ -696,6 +703,12 @@ public class B_GestionCiudades extends javax.swing.JFrame {
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
         System.exit(0);
     }//GEN-LAST:event_SalirMouseClicked
+
+    private void regresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarMouseClicked
+        A_MenuServidor nf = new A_MenuServidor();
+        nf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_regresarMouseClicked
 
     /**
      * @param args the command line arguments
