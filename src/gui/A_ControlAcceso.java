@@ -184,8 +184,13 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         if(inputUsuario.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);         
             txtusuarioObligatorio.setVisible(true);
+            
+        }else if (inputContraseña.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);         
         }else{
             txtusuarioObligatorio.setVisible(false);
+            txtcontraseñaObligatoria.setVisible(false);
+            
         }
     
         
@@ -244,7 +249,11 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUsuarioActionPerformed
 
     private void inputContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContraseñaFocusLost
-        
+        if(inputContraseña.getPassword().length == 0){
+        txtcontraseñaObligatoria.setVisible(true);
+        }else{
+            txtcontraseñaObligatoria.setVisible(false);
+        }
     }//GEN-LAST:event_inputContraseñaFocusLost
 
     /**
