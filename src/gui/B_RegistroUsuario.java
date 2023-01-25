@@ -63,9 +63,10 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRegistroUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        panelRegistroUsuario.setBackground(new java.awt.Color(255, 255, 255, 220));
         panelRegistroUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         panelRegistroUsuario.setForeground(new java.awt.Color(255, 255, 255));
         panelRegistroUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

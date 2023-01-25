@@ -73,7 +73,7 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
                 inputPaisActionPerformed(evt);
             }
         });
-        panel1.add(inputPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 170, 30));
+        panel1.add(inputPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
 
         labelPais.setFont(new java.awt.Font("Comic Book", 0, 24)); // NOI18N
         labelPais.setForeground(new java.awt.Color(255, 255, 255));

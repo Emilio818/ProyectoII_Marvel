@@ -20,6 +20,7 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         tipoUsuario.add(inputServidor);
         tipoUsuario.add(inputCliente);
         this.setLocationRelativeTo(null);
+        txtusuarioObligatorio.setVisible(false);
     }
 
     /**
@@ -33,7 +34,6 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
         tipoUsuario = new javax.swing.ButtonGroup();
         panelblanco = new javax.swing.JPanel();
-        logo = new javax.swing.JLabel();
         inputUsuario = new javax.swing.JTextField();
         labelUsuario = new javax.swing.JLabel();
         labelContraseña = new javax.swing.JLabel();
@@ -45,7 +45,9 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         ingresar = new javax.swing.JLabel();
         registroUsuario = new javax.swing.JLabel();
         salir = new javax.swing.JLabel();
-        fondo = new javax.swing.JLabel();
+        txtusuarioObligatorio = new javax.swing.JLabel();
+        LOGO = new javax.swing.JLabel();
+        FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 500));
@@ -57,12 +59,18 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.setBorder(new javax.swing.border.MatteBorder(null));
         panelblanco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/logoMarvel.png"))); // NOI18N
-        panelblanco.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 310, 100));
-
         inputUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        inputUsuario.setText("Ingrese su nombre de usuario");
         inputUsuario.setBorder(null);
+        inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputUsuarioFocusLost(evt);
+            }
+        });
+        inputUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputUsuarioMouseClicked(evt);
+            }
+        });
         panelblanco.add(inputUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 20));
 
         labelUsuario.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
@@ -96,7 +104,6 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 293, 250, -1));
 
         inputContraseña.setForeground(new java.awt.Color(204, 204, 204));
-        inputContraseña.setText("jPasswordField1");
         inputContraseña.setBorder(null);
         panelblanco.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, 30));
 
@@ -130,13 +137,20 @@ public class A_ControlAcceso extends javax.swing.JFrame {
                 salirMouseClicked(evt);
             }
         });
-        panelblanco.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, -20, 50, 70));
+        panelblanco.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 50, 50));
+
+        txtusuarioObligatorio.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        txtusuarioObligatorio.setForeground(new java.awt.Color(204, 0, 0));
+        txtusuarioObligatorio.setText("* Usuario Obligatorio");
+        panelblanco.add(txtusuarioObligatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, 20));
+
+        LOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/logoMarvel.png"))); // NOI18N
+        panelblanco.add(LOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         getContentPane().add(panelblanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 340, 500));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/controlAcceso.png"))); // NOI18N
-        fondo.setText("jLabel1");
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
+        FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/controlAcceso.png"))); // NOI18N
+        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -151,9 +165,21 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
     private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
         
+        if(inputUsuario.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);         
+            txtusuarioObligatorio.setVisible(true);
+        }else{
+            txtusuarioObligatorio.setVisible(false);
+        }
+    
+        
+        
+        
+        
         ArrayList<Usuario> usuarios = ManejoJSON.leerJSON(Usuario.RUTA, Usuario.class);
         if (usuarios.isEmpty()){
-            return ;
+            JOptionPane.showMessageDialog(null, "Error: Usuario no registrado");
+            return;
         }
         for ( int i = 0 ; i < usuarios.size() ; i++){
             if (Arrays.equals(usuarios.get(i).getContraseña(), inputContraseña.getPassword()) &&
@@ -184,6 +210,18 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         nf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registroUsuarioMouseClicked
+
+    private void inputUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseClicked
+
+    }//GEN-LAST:event_inputUsuarioMouseClicked
+
+    private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
+        if(inputUsuario.getText().trim().isEmpty()){
+        txtusuarioObligatorio.setVisible(true);
+        }else{
+            txtusuarioObligatorio.setVisible(false);
+        }
+    }//GEN-LAST:event_inputUsuarioFocusLost
 
     /**
      * @param args the command line arguments
@@ -217,7 +255,8 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel fondo;
+    private javax.swing.JLabel FONDO;
+    private javax.swing.JLabel LOGO;
     private javax.swing.JLabel ingresar;
     private javax.swing.JRadioButton inputCliente;
     private javax.swing.JPasswordField inputContraseña;
@@ -227,10 +266,10 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labelContraseña;
     private javax.swing.JLabel labelUsuario;
-    private javax.swing.JLabel logo;
     private javax.swing.JPanel panelblanco;
     private javax.swing.JLabel registroUsuario;
     private javax.swing.JLabel salir;
     private javax.swing.ButtonGroup tipoUsuario;
+    private javax.swing.JLabel txtusuarioObligatorio;
     // End of variables declaration//GEN-END:variables
 }

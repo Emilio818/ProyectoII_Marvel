@@ -64,7 +64,7 @@ public class B_CrearPartida extends javax.swing.JFrame {
                 inputCiudadActionPerformed(evt);
             }
         });
-        getContentPane().add(inputCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 140, -1));
+        getContentPane().add(inputCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 212, 140, 30));
 
         labelCiudad.setFont(new java.awt.Font("Comic Book", 0, 24)); // NOI18N
         labelCiudad.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,7 +96,7 @@ public class B_CrearPartida extends javax.swing.JFrame {
         labelCrearPartida.setFont(new java.awt.Font("Comic Book", 0, 36)); // NOI18N
         labelCrearPartida.setForeground(new java.awt.Color(255, 255, 255));
         labelCrearPartida.setText("Crear Partida");
-        getContentPane().add(labelCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
+        getContentPane().add(labelCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 300, -1));
 
         panelCrearServidor.setBackground(new java.awt.Color(255, 255, 255));
 
