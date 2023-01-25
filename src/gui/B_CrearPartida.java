@@ -198,6 +198,15 @@ public class B_CrearPartida extends javax.swing.JFrame {
     }//GEN-LAST:event_inputNombreServidorActionPerformed
 
     private void crearServidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearServidorMouseClicked
+        if(inputNombreServidor.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el nombre del servidor", "Error", JOptionPane.WARNING_MESSAGE);          
+            
+        }else if (inputCiudad.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Seleccione la ciudad", "Error", JOptionPane.WARNING_MESSAGE);         
+        }else{
+            
+      
+
         String nombre = inputNombreServidor.getText();
         ArrayList ciudades = ManejoJSON.leerJSON(Ciudad.RUTA, Ciudad.class);
         Ciudad ciudad = (Ciudad) ciudades.get(SeleccionarCiudad.slotSeleccionadoNum);
@@ -209,7 +218,7 @@ public class B_CrearPartida extends javax.swing.JFrame {
         SeleccionarHeroe sh = new SeleccionarHeroe("Servidor");
         ManejoJSON.guardarJSON(servidor, ServidorLocal.RUTA);
         sh.setVisible(true);
-        this.dispose();
+        this.dispose();}
         
         
     }//GEN-LAST:event_crearServidorMouseClicked
