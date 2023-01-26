@@ -45,12 +45,16 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         ponerBg();
         ponerSprites();
         
+        String ip = null;
         try {
-            String ip = InetAddress.getLocalHost().getHostAddress();
+            ip = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException ex) {
         }
         
-        Socket s = new Socket();
+        try {
+            Socket s = new Socket(ip, servidorLocal.getPuerto());
+        } catch (IOException ex) {            
+        }
         
         
     }

@@ -18,6 +18,8 @@ import javax.swing.JFrame;
  * @author emifu
  */
 public class ServidorLocal {
+    private ServerSocket ss;
+    
     private String nombre;
     private Ciudad ciudad;
     private String fechaCreacion;

@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import logicadenegocios.Cliente;
+import static logicadenegocios.Escenario.BOSQUE;
+import static logicadenegocios.Escenario.CIUDAD;
+import static logicadenegocios.Escenario.DESIERTO;
+import static logicadenegocios.Escenario.MONTAÑA;
 
 import logicadenegocios.Personaje;
 import logicadenegocios.ServidorLocal;
@@ -294,5 +298,14 @@ public class D_JuegoCliente extends javax.swing.JFrame {
         slotPersonaje1.repaint();
         slotPersonaje2.repaint();
     }*/
-
+private void ponerBg(String escenario) {
+        switch (escenario) {
+            case "CIUDAD" -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
+            case "MONTAÑA" -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Montaña.jpg"))); // NOI18N
+            case "BOSQUE" -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Bosque.jpg"))); // NOI18N
+            case "DESIERTO" -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Desierto.jpg"))); // NOI18N
+            default -> {
+            }
+        }
+    }
 }

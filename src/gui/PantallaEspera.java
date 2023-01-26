@@ -10,15 +10,20 @@ import logicadenegocios.ServidorLocal;
  *
  * @author Ginge
  */
-public class PantallaEspera extends javax.swing.JFrame {
-
+public class PantallaEspera extends javax.swing.JFrame implements Runnable{
+    
+    private ServidorLocal servidorLocal;
     /**
      * Creates new form PantallaEspera
+     * @param servidorLocal
      */
-    public PantallaEspera() {
-        
-        initComponents();
+    public PantallaEspera(ServidorLocal servidorLocal) {
+        this.servidorLocal = servidorLocal;
         this.setLocationRelativeTo(null);
+        initComponents();
+        
+        Thread miHilo = new Thread(this);
+        miHilo.start();
         
         //D_JuegoServidor js = new D_JuegoServidor();
         //js.setVisible(true);
@@ -132,7 +137,7 @@ public class PantallaEspera extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PantallaEspera().setVisible(true);
+                new PantallaEspera(null).setVisible(true);
             }
         });
     }
@@ -144,4 +149,9 @@ public class PantallaEspera extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelEsperando;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        System.out.println("Estoy esperando un Cliente");
+    }
 }
