@@ -73,11 +73,6 @@ public class A_ControlAcceso extends javax.swing.JFrame {
                 inputUsuarioMouseClicked(evt);
             }
         });
-        inputUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputUsuarioActionPerformed(evt);
-            }
-        });
         panelblanco.add(inputUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 20));
 
         labelUsuario.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
@@ -116,6 +111,11 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         inputContraseña.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputContraseñaFocusLost(evt);
+            }
+        });
+        inputContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputContraseñaMouseClicked(evt);
             }
         });
         inputContraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -235,10 +235,11 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_registroUsuarioMouseClicked
 
     private void inputUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseClicked
-
+         inputUsuario.setText("");
     }//GEN-LAST:event_inputUsuarioMouseClicked
 
     private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
+        inputUsuario.setText("Ingrese un nombre de usuario");
         if(inputUsuario.getText().trim().isEmpty()){
         txtusuarioObligatorio.setVisible(true);
         }else{
@@ -246,11 +247,8 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputUsuarioFocusLost
 
-    private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUsuarioActionPerformed
-
     private void inputContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContraseñaFocusLost
+        inputUsuario.setText("Contraseña");
         if(inputContraseña.getPassword().length == 0){
         txtcontraseñaObligatoria.setVisible(true);
         }else{
@@ -259,8 +257,12 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_inputContraseñaFocusLost
 
     private void inputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputContraseñaActionPerformed
-        // TODO add your handling code here:
+        inputUsuario.setText("");
     }//GEN-LAST:event_inputContraseñaActionPerformed
+
+    private void inputContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputContraseñaMouseClicked
+        inputContraseña.setText("");
+    }//GEN-LAST:event_inputContraseñaMouseClicked
 
     /**
      * @param args the command line arguments

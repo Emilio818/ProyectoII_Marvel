@@ -21,6 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -330,15 +331,23 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
     }//GEN-LAST:event_inputFranquiciaActionPerformed
 
     private void botonCorrectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCorrectoActionPerformed
-        Personaje personaje = getInformacion();  
-        if (modo == 'a'){
-            ManejoJSON.guardarJSON(personaje, Personaje.RUTA);
-        } else if (modo == 'm'){
-            ManejoJSON.modificarJSON(personaje, C_GestionHeroes.slotSeleccionadoNum, Personaje.RUTA);
+        if(inputNombre.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el nombre completo", "Error", JOptionPane.WARNING_MESSAGE);      
+        }else if (inputFecha.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Rellene la fecha de nacimiento", "Error", JOptionPane.WARNING_MESSAGE);
+        }else if (inputPseudonimo.getText().trim().isEmpty()){
+   
+        }else{
+            Personaje personaje = getInformacion();  
+            if (modo == 'a'){
+                ManejoJSON.guardarJSON(personaje, Personaje.RUTA);
+            } else if (modo == 'm'){
+                ManejoJSON.modificarJSON(personaje, C_GestionHeroes.slotSeleccionadoNum, Personaje.RUTA);
+            }
+            C_GestionHeroes gestionHeroes = new C_GestionHeroes();
+            gestionHeroes.setVisible(true);
+            this.dispose();
         }
-        C_GestionHeroes gestionHeroes = new C_GestionHeroes();
-        gestionHeroes.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_botonCorrectoActionPerformed
 
     private void botonAgregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarFotoActionPerformed

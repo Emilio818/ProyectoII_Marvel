@@ -94,30 +94,75 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         inputApellidos.setForeground(new java.awt.Color(153, 153, 153));
         inputApellidos.setText("Ingrese ambos apellidos");
         inputApellidos.setBorder(null);
+        inputApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputApellidosFocusLost(evt);
+            }
+        });
+        inputApellidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputApellidosMouseClicked(evt);
+            }
+        });
         panelRegistroUsuario.add(inputApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
 
         inputCorreo.setForeground(new java.awt.Color(153, 153, 153));
         inputCorreo.setText("Ingrese correo");
         inputCorreo.setBorder(null);
+        inputCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputCorreoFocusLost(evt);
+            }
+        });
+        inputCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputCorreoMouseClicked(evt);
+            }
+        });
         panelRegistroUsuario.add(inputCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 140, -1));
 
         inputNombre.setForeground(new java.awt.Color(153, 153, 153));
         inputNombre.setText("Ingrese nombre");
         inputNombre.setBorder(null);
+        inputNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputNombreFocusLost(evt);
+            }
+        });
+        inputNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputNombreMouseClicked(evt);
+            }
+        });
         panelRegistroUsuario.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 140, -1));
 
         inputUsuario.setBackground(new java.awt.Color(242, 242, 242));
         inputUsuario.setForeground(new java.awt.Color(153, 153, 153));
         inputUsuario.setText("Ingrese usuario válido");
         inputUsuario.setBorder(null);
+        inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputUsuarioFocusLost(evt);
+            }
+        });
+        inputUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputUsuarioMouseClicked(evt);
+            }
+        });
         panelRegistroUsuario.add(inputUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, -1));
 
         inputContraseña.setForeground(new java.awt.Color(153, 153, 153));
         inputContraseña.setText("jPasswordField1");
         inputContraseña.setBorder(null);
-        inputContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputContraseñaActionPerformed(evt);
+        inputContraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContraseñaFocusLost(evt);
+            }
+        });
+        inputContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputContraseñaMouseClicked(evt);
             }
         });
         panelRegistroUsuario.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 130, -1));
@@ -229,6 +274,7 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
 
         labelAtras.setFont(new java.awt.Font("Comic Book", 1, 18)); // NOI18N
         labelAtras.setForeground(new java.awt.Color(255, 255, 255));
+        labelAtras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAtras.setText("Atras");
         labelAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,16 +286,11 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         panelAtras.setLayout(panelAtrasLayout);
         panelAtrasLayout.setHorizontalGroup(
             panelAtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAtrasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelAtras)
-                .addContainerGap())
+            .addComponent(labelAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
         panelAtrasLayout.setVerticalGroup(
             panelAtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAtrasLayout.createSequentialGroup()
-                .addComponent(labelAtras)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(labelAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 70, 30));
@@ -260,13 +301,14 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
 
         labelSalir.setFont(new java.awt.Font("Comic Book", 1, 18)); // NOI18N
         labelSalir.setForeground(new java.awt.Color(255, 255, 255));
+        labelSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelSalir.setText("Salir");
         labelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelSalirMouseClicked(evt);
             }
         });
-        panelSalir.add(labelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 30));
+        panelSalir.add(labelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
 
         getContentPane().add(panelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 70, 30));
 
@@ -300,7 +342,7 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Rellene los apellidos", "Error", JOptionPane.WARNING_MESSAGE);
         }else if (inputCorreo.getText().trim().isEmpty() | inputCorreo.getText().equals("Ingrese correo")){
             JOptionPane.showMessageDialog(null, "Rellene el correo", "Error", JOptionPane.WARNING_MESSAGE); 
-        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getText().equals("jPasswordField1")){
+        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getPassword().equals("jPasswordField1")){
             JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);
         }else if (inputUsuario.getText().trim().isEmpty() | inputUsuario.getText().equals("Ingrese usuario válido")){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);
@@ -312,9 +354,45 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clickAñadir
 
-    private void inputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputContraseñaActionPerformed
+    private void inputNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusLost
+        inputNombre.setText("Ingrese nombre");
+    }//GEN-LAST:event_inputNombreFocusLost
+
+    private void inputApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputApellidosFocusLost
+        inputApellidos.setText("Ingrese ambos apellidos");
+    }//GEN-LAST:event_inputApellidosFocusLost
+
+    private void inputCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCorreoFocusLost
+        inputCorreo.setText("Ingrese correo válido");
+    }//GEN-LAST:event_inputCorreoFocusLost
+
+    private void inputContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContraseñaFocusLost
+        inputContraseña.setText("Contraseña");
+    }//GEN-LAST:event_inputContraseñaFocusLost
+
+    private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
+        inputUsuario.setText("Ingrese usuario válido");
+    }//GEN-LAST:event_inputUsuarioFocusLost
+
+    private void inputNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputNombreMouseClicked
+        inputNombre.setText("");
+    }//GEN-LAST:event_inputNombreMouseClicked
+
+    private void inputApellidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputApellidosMouseClicked
+        inputApellidos.setText("");
+    }//GEN-LAST:event_inputApellidosMouseClicked
+
+    private void inputCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputCorreoMouseClicked
+        inputCorreo.setText("");
+    }//GEN-LAST:event_inputCorreoMouseClicked
+
+    private void inputContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputContraseñaMouseClicked
+        inputContraseña.setText("");
+    }//GEN-LAST:event_inputContraseñaMouseClicked
+
+    private void inputUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseClicked
+        inputUsuario.setText("");
+    }//GEN-LAST:event_inputUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
