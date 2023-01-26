@@ -1,6 +1,7 @@
 package gui;
 
 
+import aplicacion.ManejoJSON;
 import static gui.D_JuegoCliente.dout;
 import static gui.D_JuegoCliente.turno;
 import java.awt.BorderLayout;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import logicadenegocios.Cliente;
 import logicadenegocios.Conexion;
 import logicadenegocios.Escenario;
+import logicadenegocios.Estadistica;
 import logicadenegocios.Personaje;
 
 import logicadenegocios.ServidorLocal;
@@ -58,6 +60,8 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         panelChat.setVisible(false);
         ponerBg();
         
+        labelTipoUsuario.setText("Servidor: " + A_ControlAcceso.usuario);
+        
         Thread cicloSecundario = new Thread(this);
         cicloSecundario.start();
         
@@ -90,6 +94,7 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         botonChat = new javax.swing.JButton();
         botonAtaque = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
+        labelTipoUsuario = new javax.swing.JLabel();
         labelBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,13 +109,20 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         panelChat.setOpaque(false);
         panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        textArea.setEditable(false);
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
         panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
 
+        inputText.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputText.setText("Escribe algo . . .");
+        inputText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputTextMouseClicked(evt);
+            }
+        });
         inputText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputTextActionPerformed(evt);
@@ -118,7 +130,8 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         });
         panelChat.add(inputText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
 
-        botonEnviar.setText("Enviar");
+        botonEnviar.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        botonEnviar.setText("Send");
         botonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEnviarActionPerformed(evt);
@@ -141,6 +154,7 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         infoPersonaje1.setOpaque(false);
         infoPersonaje1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelNombre1.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         labelNombre1.setText("jLabel1");
         infoPersonaje1.add(labelNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
 
@@ -155,6 +169,7 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         infoPersonaje2.setOpaque(false);
         infoPersonaje2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelNombre2.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         labelNombre2.setText("jLabel1");
         infoPersonaje2.add(labelNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
 
@@ -166,14 +181,16 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
 
         panelbg.add(infoPersonaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 300, -1));
 
+        botonChat.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         botonChat.setText("Chat");
         botonChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonChatActionPerformed(evt);
             }
         });
-        panelbg.add(botonChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 60, -1));
+        panelbg.add(botonChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 70, -1));
 
+        botonAtaque.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         botonAtaque.setText("Atacar");
         botonAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,8 +199,12 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         });
         panelbg.add(botonAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, -1, -1));
 
+        botonSalir.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         botonSalir.setText("Salir");
         panelbg.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, -1));
+
+        labelTipoUsuario.setFont(new java.awt.Font("Comic Book", 0, 36)); // NOI18N
+        panelbg.add(labelTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 660, 90));
 
         labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
         panelbg.add(labelBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -210,8 +231,10 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
             System.out.println("Servidor: Enviando Mensaje . . .");
             Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto() + 1);
             dout = new DataOutputStream(s.getOutputStream());
-            dout.writeUTF(inputText.getText());
+            dout.writeUTF(A_ControlAcceso.usuario + ": " + inputText.getText());
             System.out.println("Servidor: Mensaje enviado . . .");
+            textArea.setText(textArea.getText() + A_ControlAcceso.usuario + ": " +  inputText.getText() + "\n");
+            inputText.setText("");
         } catch (IOException ex) {
             System.out.println("Error Servidor Boton enviar");
             System.out.println(ex.getMessage());
@@ -223,6 +246,7 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
             barVida2.setValue(barVida2.getValue() - personaje1.getpDatosHeroe().getpPoder().poderTotal());
             labelVida2.setText("" +barVida2.getValue());
             if (barVida2.getValue() <= 0) {
+                crearEstadistica("Victoria");
                 E_Victoria ev = new E_Victoria();
                 ev.setVisible(true);
                 this.dispose();
@@ -243,6 +267,12 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
            JOptionPane.showMessageDialog(null, "Es Turno del Cliente"); 
         }
     }//GEN-LAST:event_botonAtaqueActionPerformed
+
+    private void inputTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputTextMouseClicked
+        if (inputText.getText().trim().isEmpty() | inputText.getText().equals("Escribe algo . . .")){
+            inputText.setText("");
+        }
+    }//GEN-LAST:event_inputTextMouseClicked
 
     /**
      * @param args the command line arguments
@@ -291,6 +321,7 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel labelBg;
     private javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelNombre2;
+    private javax.swing.JLabel labelTipoUsuario;
     private javax.swing.JLabel labelVida1;
     private javax.swing.JLabel labelVida2;
     private javax.swing.JPanel panelChat;
@@ -379,9 +410,11 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
             barVida1.setValue(barVida1.getValue() - personaje2.getpDatosHeroe().getpPoder().poderTotal());
             labelVida1.setText("" +barVida1.getValue());
             if (barVida1.getValue() <= 0) {
+                crearEstadistica("Derrota");
                 E_Derrota ed = new E_Derrota();
                 ed.setVisible(true);
                 this.dispose(); 
+                
             }
             D_JuegoServidor.turno = 1;
         } else {
@@ -418,5 +451,10 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         
         labelVida1.setText("" + maxVidaTemp1);
         labelVida2.setText("" + maxVidaTemp2); 
+    }
+
+    private void crearEstadistica(String estado) {
+        Estadistica estadistica = new Estadistica(A_ControlAcceso.usuario, estado, personaje1);
+        ManejoJSON.guardarJSON(this, Estadistica.RUTA);
     }
 }   

@@ -11,7 +11,8 @@ import logicadenegocios.Usuario;
  * @author Ginge
  */
 public class A_ControlAcceso extends javax.swing.JFrame {
-
+    
+    public static String usuario;
     /**
      * Creates new form ControlAcceso
      */
@@ -170,7 +171,7 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_inputClienteActionPerformed
 
     private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
-        
+        A_ControlAcceso.usuario = inputUsuario.getText();
         if(inputUsuario.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);         
             txtusuarioObligatorio.setVisible(true);
