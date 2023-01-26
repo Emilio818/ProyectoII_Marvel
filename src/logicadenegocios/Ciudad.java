@@ -2,12 +2,13 @@ package logicadenegocios;
 
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  *
  * @author Ginger
  */
-public class Ciudad {
+public class Ciudad implements Serializable{
     private String pais;
     private String estado;
     private String ciudad;

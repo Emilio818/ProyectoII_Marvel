@@ -1,8 +1,9 @@
 package logicadenegocios;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class DatosPersonales {
+public class DatosPersonales implements Serializable{
     @SerializedName("nombreCompleto")
     private String mNombreCompleto;
     @SerializedName("fechaNacimiento")

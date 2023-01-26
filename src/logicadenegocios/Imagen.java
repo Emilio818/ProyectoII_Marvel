@@ -1,11 +1,13 @@
 
 package logicadenegocios;
 
+import java.io.Serializable;
+
 /**
  *
  * @author emifu
  */
-public class Imagen {
+public class Imagen implements Serializable{
     String ruta;
 
     public Imagen(String ruta) {

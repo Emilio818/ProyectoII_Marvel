@@ -1,6 +1,8 @@
 package gui;
 
 
+import static gui.D_JuegoCliente.dout;
+import static gui.D_JuegoCliente.turno;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +10,8 @@ import java.awt.Image;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,6 +19,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import logicadenegocios.Cliente;
 import logicadenegocios.Conexion;
 import logicadenegocios.Escenario;
@@ -36,6 +41,10 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
     private DataInputStream din;
     private DataOutputStream dout;
     
+    public static int turno = 1;
+    
+    public static int contTurnos = 0;
+    
     /**
      * Creates new form Escenario
      * @param conexion
@@ -51,11 +60,6 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         
         Thread cicloSecundario = new Thread(this);
         cicloSecundario.start();
-        
-        ponerSprites();
-        
-        
-        
         
     }
     /**
@@ -78,16 +82,14 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         infoPersonaje1 = new javax.swing.JPanel();
         labelNombre1 = new javax.swing.JLabel();
         barVida1 = new javax.swing.JProgressBar();
-        labelVida = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        labelVida1 = new javax.swing.JLabel();
         infoPersonaje2 = new javax.swing.JPanel();
         labelNombre2 = new javax.swing.JLabel();
         barVida2 = new javax.swing.JProgressBar();
-        labelVida1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        labelVida2 = new javax.swing.JLabel();
+        botonChat = new javax.swing.JButton();
+        botonAtaque = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
         labelBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,16 +147,8 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         barVida1.setValue(100);
         infoPersonaje1.add(barVida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 160, 20));
 
-        labelVida.setText("jLabel1");
-        infoPersonaje1.add(labelVida, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 26, 50, 20));
-
-        jLabel1.setText("jLabel1");
-        jLabel1.setPreferredSize(new java.awt.Dimension(20, 20));
-        infoPersonaje1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 20));
-
-        jLabel2.setText("jLabel1");
-        jLabel2.setPreferredSize(new java.awt.Dimension(20, 20));
-        infoPersonaje1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
+        labelVida1.setText("jLabel1");
+        infoPersonaje1.add(labelVida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 26, 50, 20));
 
         panelbg.add(infoPersonaje1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 300, -1));
 
@@ -167,26 +161,31 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         barVida2.setValue(100);
         infoPersonaje2.add(barVida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 160, 20));
 
-        labelVida1.setText("jLabel1");
-        infoPersonaje2.add(labelVida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 26, 50, 20));
-
-        jLabel3.setText("jLabel1");
-        jLabel3.setPreferredSize(new java.awt.Dimension(20, 20));
-        infoPersonaje2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 20));
-
-        jLabel4.setText("jLabel1");
-        jLabel4.setPreferredSize(new java.awt.Dimension(20, 20));
-        infoPersonaje2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
+        labelVida2.setText("jLabel1");
+        infoPersonaje2.add(labelVida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 26, 50, 20));
 
         panelbg.add(infoPersonaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 300, -1));
 
-        jButton1.setText("Chat");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonChat.setText("Chat");
+        botonChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonChatActionPerformed(evt);
             }
         });
-        panelbg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 30));
+        panelbg.add(botonChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 60, -1));
+
+        botonAtaque.setText("Atacar");
+        botonAtaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtaqueActionPerformed(evt);
+            }
+        });
+        panelbg.add(botonAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, -1, -1));
+
+        botonSalir.setText("Salir");
+        panelbg.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, -1));
+
+        labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
         panelbg.add(labelBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(panelbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -194,13 +193,13 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonChatActionPerformed
         if (panelChat.isVisible()){
             panelChat.setVisible(false);
         } else{
             panelChat.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonChatActionPerformed
 
     private void inputTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTextActionPerformed
         // TODO add your handling code here:
@@ -208,18 +207,42 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
 
     private void botonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnviarActionPerformed
         try {
-            System.out.println("Servidor: Creando Socket");
-            Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto());
+            System.out.println("Servidor: Enviando Mensaje . . .");
+            Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto() + 1);
             dout = new DataOutputStream(s.getOutputStream());
             dout.writeUTF(inputText.getText());
-            dout.close();
-            s.close();
-            System.out.println("Cliente: Cerrando Socket");
+            System.out.println("Servidor: Mensaje enviado . . .");
         } catch (IOException ex) {
-            System.out.println("Wenas");
+            System.out.println("Error Servidor Boton enviar");
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_botonEnviarActionPerformed
+
+    private void botonAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtaqueActionPerformed
+        if ( D_JuegoServidor.turno == 1){
+            barVida2.setValue(barVida2.getValue() - personaje1.getpDatosHeroe().getpPoder().poderTotal());
+            labelVida2.setText("" +barVida2.getValue());
+            if (barVida2.getValue() <= 0) {
+                E_Victoria ev = new E_Victoria();
+                ev.setVisible(true);
+                this.dispose();
+            }
+            D_JuegoServidor.turno = 2;
+            JOptionPane.showMessageDialog(null, "Turno del Cliente");
+            try {
+                System.out.println("Servidor: Enviando Ataque . . .");
+                Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto() + 1);
+                dout = new DataOutputStream(s.getOutputStream());
+                dout.writeUTF("atacar");
+                System.out.println("Servidor: Ataque enviado . . .");
+            } catch (IOException ex) {
+                System.out.println("Error Servidor Boton Ataque");
+                System.out.println(ex.getMessage());   
+            }          
+        } else {
+           JOptionPane.showMessageDialog(null, "Es Turno del Cliente"); 
+        }
+    }//GEN-LAST:event_botonAtaqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,21 +280,19 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barVida1;
     private javax.swing.JProgressBar barVida2;
+    private javax.swing.JButton botonAtaque;
+    private javax.swing.JButton botonChat;
     private javax.swing.JButton botonEnviar;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JPanel infoPersonaje1;
     private javax.swing.JPanel infoPersonaje2;
     private javax.swing.JTextField inputText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBg;
     private javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelNombre2;
-    private javax.swing.JLabel labelVida;
     private javax.swing.JLabel labelVida1;
+    private javax.swing.JLabel labelVida2;
     private javax.swing.JPanel panelChat;
     private java.awt.Panel panelbg;
     private javax.swing.JPanel slotPersonaje1;
@@ -284,25 +305,25 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         
     }
     private void ponerSprites() {
-      /*  System.out.println(ControlJuego.personaje1);
-        System.out.println(ControlJuego.personaje2);
-        SpritePersonaje personaje1 = new SpritePersonaje(ControlJuego.personaje1,"1");
-        SpritePersonaje personaje2 = new SpritePersonaje(ControlJuego.personaje2,"2");
+        SpritePersonaje spritePersonaje1 = new SpritePersonaje(personaje1.getpDatosHeroe().getmPseudonimo(),"1");
+        SpritePersonaje spritePersonaje2 = new SpritePersonaje(personaje2.getpDatosHeroe().getmPseudonimo(),"2");
         
-        personaje1.setSize(300, 300);
-        personaje2.setSize(300, 300);
-        personaje1.setLocation(0, 0);
-        personaje2.setLocation(0, 0);
+        spritePersonaje1.setSize(300, 300);
+        spritePersonaje2.setSize(300, 300);
+        spritePersonaje1.setLocation(0, 0);
+        spritePersonaje2.setLocation(0, 0);
         slotPersonaje1.removeAll();
         slotPersonaje2.removeAll();
-        slotPersonaje1.add(personaje1);
-        slotPersonaje2.add(personaje2);
+        slotPersonaje1.add(spritePersonaje1);
+        slotPersonaje2.add(spritePersonaje2);
         slotPersonaje1.revalidate();
         slotPersonaje2.revalidate();
         slotPersonaje1.repaint();
         slotPersonaje2.repaint();
-        // Fondo Correspondiente*/
-    
+        
+        iniciarSprites();
+        llenarLabels();
+
     }
     private void ponerBg() {
         Escenario escenario = conexion.getSl().getCiudad().getEscenario();
@@ -321,27 +342,81 @@ public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
         System.out.println("Server: Iniciando rama segundaria");
         try {
             conexion.setSs(new ServerSocket(conexion.getSl().getPuerto()));
+            
             while (true){
                 System.out.println("Server: Esperando Instruccion");
                 Socket s = conexion.getSs().accept();  
                 System.out.println("Server: Instruccion aceptada");
-                din = new DataInputStream(s.getInputStream());
-                String textDin = din.readUTF();
-
-                evento(textDin);
+                System.out.println(s.getInputStream().getClass());
+                System.out.println(Personaje.class);
+                if (personaje2 == null){
+                    ObjectInputStream paquete_datos = new ObjectInputStream(s.getInputStream());
+                    personaje2 = (Personaje) paquete_datos.readObject();
+                    System.out.println("Servidor "+ personaje2);    
+                    ponerSprites();
+                    
+                    
+                    paquete_datos.close();
+                } else {
+                    din = new DataInputStream(s.getInputStream());  
+                    String textDin = din.readUTF();
+                    evento(textDin);
+                    din.close();
+                }                
                 s.close();
                 System.out.println("Server: Instruccion Finalizada");
                 }
  
             
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println("Server: Error");
-            System.out.println(ex.getMessage());    
-        }
+            System.out.println(ex.getMessage());
+        }    
     }
 
     private void evento(String textDin) {
-        System.out.println("Mensaje Recibido");
-        textArea.setText(textDin + "\n");
+        if ( textDin.equals("atacar")) {
+            barVida1.setValue(barVida1.getValue() - personaje2.getpDatosHeroe().getpPoder().poderTotal());
+            labelVida1.setText("" +barVida1.getValue());
+            if (barVida1.getValue() <= 0) {
+                E_Derrota ed = new E_Derrota();
+                ed.setVisible(true);
+                this.dispose(); 
+            }
+            D_JuegoServidor.turno = 1;
+        } else {
+           System.out.println("Mensaje Recibido");
+            textArea.setText(textArea.getText() + textDin + "\n"); 
+        }
+    }
+
+    private void iniciarSprites() {
+        try {
+            Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto() + 1);
+            ObjectOutputStream paquete_datos = new ObjectOutputStream(s.getOutputStream());
+            System.out.println("Cliente: Enviando Personaje");
+            paquete_datos.writeObject(personaje1);
+            System.out.println("Cliente: Personaje Enviado");
+            System.out.println("Cliente " + personaje1);
+        } catch (IOException ex) {
+            System.out.println("Error JuegoCliente Enviando personaje");
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void llenarLabels() {
+        labelNombre1.setText(personaje1.getpDatosHeroe().getmPseudonimo());
+        labelNombre2.setText(personaje2.getpDatosHeroe().getmPseudonimo());
+        
+        int maxVidaTemp1 = personaje1.getpDatosHeroe().getpPoder().getpVida() * 10;
+        barVida1.setMaximum(maxVidaTemp1);
+        barVida1.setValue(maxVidaTemp1);
+        
+        int maxVidaTemp2 = personaje2.getpDatosHeroe().getpPoder().getpVida() * 10;
+        barVida2.setMaximum(maxVidaTemp2);
+        barVida2.setValue(maxVidaTemp2);
+        
+        labelVida1.setText("" + maxVidaTemp1);
+        labelVida2.setText("" + maxVidaTemp2); 
     }
 }   

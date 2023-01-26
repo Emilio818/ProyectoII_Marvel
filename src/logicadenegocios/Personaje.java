@@ -3,9 +3,10 @@ package logicadenegocios;
 import com.google.gson.annotations.SerializedName;
 import java.awt.Image;
 import java.io.File;
+import java.io.Serializable;
 
 
-public class Personaje {
+public class Personaje implements Serializable {
     @SerializedName("datosHeroe")
     private DatosHeroe pDatosHeroe;
     @SerializedName("datosPersonales")

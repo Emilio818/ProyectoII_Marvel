@@ -2,12 +2,13 @@
 package logicadenegocios;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  *
  * @author emifu
  */
-public class DatosHeroe {
+public class DatosHeroe implements Serializable{
     @SerializedName("pseudonimo")
     private String pPseudonimo;
     @SerializedName("tipoDeClase")

@@ -31,6 +31,7 @@ public class PantallaEspera extends javax.swing.JFrame implements Runnable{
         this.personaje1 = personaje1;
         this.setLocationRelativeTo(null);
         initComponents();
+        this.setLocationRelativeTo(null);
  
         
         Thread miHilo = new Thread(this);
