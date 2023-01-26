@@ -171,7 +171,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         slotPoder10 = new javax.swing.JLabel();
         slotImagen10 = new javax.swing.JLabel();
         botonSeleccionar = new javax.swing.JButton();
-        botonGuardar = new javax.swing.JButton();
+        botonRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -565,13 +565,13 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         });
         fondo.add(botonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, -1));
 
-        botonGuardar.setText("Regresar");
-        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+        botonRegresar.setText("Regresar");
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
+                botonRegresarActionPerformed(evt);
             }
         });
-        fondo.add(botonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 470, 110, -1));
+        fondo.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 470, 110, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/gestionHeroes.png"))); // NOI18N
         fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -597,9 +597,15 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonSeleccionarActionPerformed
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonGuardarActionPerformed
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        if ( tipo.equals("Servidor") ){
+            B_CrearPartida cp = new B_CrearPartida();
+            cp.setVisible(true);
+        } else {
+            B_Servidores s = new B_Servidores();
+            s.setVisible(true);
+        }
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void clickSlot1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickSlot1
         slotPersonaje1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
@@ -721,7 +727,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSeleccionar;
     private java.awt.Panel fondo;
     private javax.swing.JLabel jLabel1;
