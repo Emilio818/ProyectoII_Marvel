@@ -7,10 +7,12 @@ import gui.D_JuegoCliente;
 import gui.D_JuegoServidor;
 import static aplicacion.ManejoJSON.borrarTodoJSON;
 import static gui.C_GestionHeroes.ciudad;
+import static gui.SeleccionarCiudad.slotSeleccionadoNum;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import logicadenegocios.*;
 import static logicadenegocios.TipoDeClase.COSMICO;
 import static logicadenegocios.TipoDeClase.HABIL;
@@ -581,7 +583,9 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
 
     private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
         
-        if ( tipo.equals("Servidor")){  
+        if (slotSeleccionadoNum != -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un héroe");
+        }else if ( tipo.equals("Servidor")){  
             D_JuegoServidor ph = new D_JuegoServidor(servidorLocal);
             ph.setVisible(true);          
         } else {
