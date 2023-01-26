@@ -53,6 +53,8 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
         labelTitulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Confirmar = new javax.swing.JLabel();
+        Salir = new javax.swing.JLabel();
+        Atras = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,14 +115,14 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
         labelCiudad.setForeground(new java.awt.Color(255, 255, 255));
         labelCiudad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelCiudad.setText("Ciudad");
-        panel1.add(labelCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, 30));
+        panel1.add(labelCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 90, 30));
 
         inputEscenario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEscenarioActionPerformed(evt);
             }
         });
-        panel1.add(inputEscenario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 170, 30));
+        panel1.add(inputEscenario, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 170, 30));
 
         labelTitulo.setFont(new java.awt.Font("Comic Book", 1, 36)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,6 +145,28 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
         jPanel1.add(Confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 30));
 
         panel1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 170, 30));
+
+        Salir.setFont(new java.awt.Font("Comic Book", 0, 18)); // NOI18N
+        Salir.setForeground(new java.awt.Color(255, 255, 255));
+        Salir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Salir.setText("Salir");
+        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SalirMouseClicked(evt);
+            }
+        });
+        panel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 70, 30));
+
+        Atras.setFont(new java.awt.Font("Comic Book", 0, 18)); // NOI18N
+        Atras.setForeground(new java.awt.Color(255, 255, 255));
+        Atras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Atras.setText("Atrás");
+        Atras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AtrasMouseClicked(evt);
+            }
+        });
+        panel1.add(Atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 70, 30));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/gestionCiudades.png"))); // NOI18N
         fondo.setToolTipText("");
@@ -208,6 +232,16 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ConfirmarMouseClicked
 
+    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_SalirMouseClicked
+
+    private void AtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtrasMouseClicked
+        B_GestionCiudades nf = new B_GestionCiudades();
+        nf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AtrasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -246,7 +280,9 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Atras;
     private javax.swing.JLabel Confirmar;
+    private javax.swing.JLabel Salir;
     private javax.swing.JLabel fondo;
     private javax.swing.JTextField inputCiudad;
     private javax.swing.JComboBox<Escenario> inputEscenario;

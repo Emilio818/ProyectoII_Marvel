@@ -60,32 +60,6 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inputFranquicia = new javax.swing.JComboBox<>();
-        labelFranquicia = new javax.swing.JLabel();
-        labelTipoDePersonaje = new javax.swing.JLabel();
-        sliderFuerza = new javax.swing.JSlider();
-        sliderVelocidad = new javax.swing.JSlider();
-        sliderInteligencia = new javax.swing.JSlider();
-        sliderVida = new javax.swing.JSlider();
-        labelFuerza = new javax.swing.JLabel();
-        labelVelocidad = new javax.swing.JLabel();
-        labelInteligencia = new javax.swing.JLabel();
-        labelPoderNum = new javax.swing.JLabel();
-        botonCorrecto = new javax.swing.JButton();
-        labelPseudonimo = new javax.swing.JLabel();
-        inputPseudonimo = new javax.swing.JTextField();
-        inputTipoDePersonaje = new javax.swing.JComboBox<>();
-        labelTipoDeClase = new javax.swing.JLabel();
-        inputTipoDeClase = new javax.swing.JComboBox<>();
-        labelRecursosEco1 = new javax.swing.JLabel();
-        sliderRecursosEco = new javax.swing.JSlider();
-        labelVelocidadNum = new javax.swing.JLabel();
-        labelVida = new javax.swing.JLabel();
-        labelVidaNum = new javax.swing.JLabel();
-        labelRecursosEcoNum = new javax.swing.JLabel();
-        labelInteligenciaNum = new javax.swing.JLabel();
-        labelFuerzaNum = new javax.swing.JLabel();
-        labelPoderText = new javax.swing.JLabel();
         panelRegistroUsuario = new javax.swing.JPanel();
         inputFoto = new javax.swing.JLabel();
         imagen = new Imagen("/recursos/defecto/foto.png");
@@ -97,6 +71,32 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
         inputCiudad = new javax.swing.JTextField();
         labelCiudad = new javax.swing.JLabel();
         labelTitulo = new javax.swing.JLabel();
+        labelFuerza = new javax.swing.JLabel();
+        sliderFuerza = new javax.swing.JSlider();
+        labelFuerzaNum = new javax.swing.JLabel();
+        labelVida = new javax.swing.JLabel();
+        sliderVida = new javax.swing.JSlider();
+        labelVidaNum = new javax.swing.JLabel();
+        labelVelocidadNum = new javax.swing.JLabel();
+        labelVelocidad = new javax.swing.JLabel();
+        labelInteligenciaNum = new javax.swing.JLabel();
+        labelInteligencia = new javax.swing.JLabel();
+        sliderInteligencia = new javax.swing.JSlider();
+        sliderVelocidad = new javax.swing.JSlider();
+        labelRecursosEco1 = new javax.swing.JLabel();
+        sliderRecursosEco = new javax.swing.JSlider();
+        labelRecursosEcoNum = new javax.swing.JLabel();
+        labelPoderText = new javax.swing.JLabel();
+        labelPoderNum = new javax.swing.JLabel();
+        inputFranquicia = new javax.swing.JComboBox<>();
+        labelFranquicia = new javax.swing.JLabel();
+        inputTipoDePersonaje = new javax.swing.JComboBox<>();
+        labelTipoDePersonaje = new javax.swing.JLabel();
+        inputTipoDeClase = new javax.swing.JComboBox<>();
+        labelTipoDeClase = new javax.swing.JLabel();
+        inputPseudonimo = new javax.swing.JTextField();
+        labelPseudonimo = new javax.swing.JLabel();
+        botonCorrecto = new javax.swing.JButton();
         salir = new javax.swing.JLabel();
         atras = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -106,159 +106,13 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        inputFranquicia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        inputFranquicia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marvel", "DC", "Otro" }));
-        inputFranquicia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputFranquiciaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(inputFranquicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 130, -1));
-
-        labelFranquicia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelFranquicia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelFranquicia.setText("Franquicia");
-        getContentPane().add(labelFranquicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 80, 30));
-
-        labelTipoDePersonaje.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelTipoDePersonaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelTipoDePersonaje.setText("Tipo de Personaje");
-        getContentPane().add(labelTipoDePersonaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 120, 30));
-
-        sliderFuerza.setMajorTickSpacing(25);
-        sliderFuerza.setPaintTicks(true);
-        sliderFuerza.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderFuerzaStateChanged(evt);
-            }
-        });
-        getContentPane().add(sliderFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
-
-        sliderVelocidad.setMajorTickSpacing(25);
-        sliderVelocidad.setPaintTicks(true);
-        sliderVelocidad.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderVelocidadStateChanged(evt);
-            }
-        });
-        getContentPane().add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, -1, -1));
-
-        sliderInteligencia.setMajorTickSpacing(25);
-        sliderInteligencia.setPaintTicks(true);
-        sliderInteligencia.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderInteligenciaStateChanged(evt);
-            }
-        });
-        getContentPane().add(sliderInteligencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, -1));
-
-        sliderVida.setMajorTickSpacing(25);
-        sliderVida.setPaintTicks(true);
-        sliderVida.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderVidaStateChanged(evt);
-            }
-        });
-        getContentPane().add(sliderVida, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
-
-        labelFuerza.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelFuerza.setText("Fuerza");
-        getContentPane().add(labelFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
-
-        labelVelocidad.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelVelocidad.setText("Velocidad");
-        getContentPane().add(labelVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, -1, -1));
-
-        labelInteligencia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelInteligencia.setText("Inteligencia");
-        getContentPane().add(labelInteligencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
-
-        labelPoderNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelPoderNum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelPoderNum.setText("50");
-        labelPoderNum.setToolTipText("");
-        labelPoderNum.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(labelPoderNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 330, 40, 40));
-
-        botonCorrecto.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        botonCorrecto.setText("Confirmar");
-        botonCorrecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCorrectoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonCorrecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 120, -1));
-
-        labelPseudonimo.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelPseudonimo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelPseudonimo.setText("Pseudonimo");
-        getContentPane().add(labelPseudonimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 90, 30));
-        getContentPane().add(inputPseudonimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 131, -1));
-
-        getContentPane().add(inputTipoDePersonaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 130, -1));
-
-        labelTipoDeClase.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelTipoDeClase.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelTipoDeClase.setText("Tipo de Clase");
-        getContentPane().add(labelTipoDeClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 90, 30));
-
-        inputTipoDeClase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTipoDeClaseActionPerformed(evt);
-            }
-        });
-        getContentPane().add(inputTipoDeClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 130, -1));
-
-        labelRecursosEco1.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelRecursosEco1.setText("Recursos Economicos");
-        getContentPane().add(labelRecursosEco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, -1, 20));
-
-        sliderRecursosEco.setMajorTickSpacing(25);
-        sliderRecursosEco.setPaintTicks(true);
-        sliderRecursosEco.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderRecursosEcoStateChanged(evt);
-            }
-        });
-        getContentPane().add(sliderRecursosEco, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
-
-        labelVelocidadNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelVelocidadNum.setText("50");
-        getContentPane().add(labelVelocidadNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, -1, 20));
-
-        labelVida.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelVida.setText("Vida");
-        getContentPane().add(labelVida, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, -1, 20));
-
-        labelVidaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelVidaNum.setText("50");
-        getContentPane().add(labelVidaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, -1, 20));
-
-        labelRecursosEcoNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelRecursosEcoNum.setText("50");
-        getContentPane().add(labelRecursosEcoNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, -1, 20));
-
-        labelInteligenciaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelInteligenciaNum.setText("50");
-        getContentPane().add(labelInteligenciaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, 20));
-
-        labelFuerzaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelFuerzaNum.setText("50");
-        getContentPane().add(labelFuerzaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, 20));
-
-        labelPoderText.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
-        labelPoderText.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelPoderText.setText("PODER");
-        labelPoderText.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(labelPoderText, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 90, 40));
-
         panelRegistroUsuario.setBackground(new java.awt.Color(255, 255, 255, 220));
         panelRegistroUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         panelRegistroUsuario.setForeground(new java.awt.Color(255, 255, 220, 220));
         panelRegistroUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/defecto/foto.png"))); // NOI18N
-        panelRegistroUsuario.add(inputFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
+        panelRegistroUsuario.add(inputFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
         botonAgregarFoto.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         botonAgregarFoto.setText("Agregar Foto");
@@ -267,7 +121,7 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
                 botonAgregarFotoActionPerformed(evt);
             }
         });
-        panelRegistroUsuario.add(botonAgregarFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 130, -1));
+        panelRegistroUsuario.add(botonAgregarFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 130, -1));
         panelRegistroUsuario.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 130, -1));
         panelRegistroUsuario.add(inputFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 130, -1));
 
@@ -295,7 +149,153 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
         labelTitulo.setText("Nuevo Personaje");
         panelRegistroUsuario.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 20, 400, 30));
 
-        getContentPane().add(panelRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 770, 430));
+        labelFuerza.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelFuerza.setText("Fuerza");
+        panelRegistroUsuario.add(labelFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
+
+        sliderFuerza.setMajorTickSpacing(25);
+        sliderFuerza.setPaintTicks(true);
+        sliderFuerza.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderFuerzaStateChanged(evt);
+            }
+        });
+        panelRegistroUsuario.add(sliderFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
+
+        labelFuerzaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelFuerzaNum.setText("50");
+        panelRegistroUsuario.add(labelFuerzaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, 20));
+
+        labelVida.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelVida.setText("Vida");
+        panelRegistroUsuario.add(labelVida, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, -1, 20));
+
+        sliderVida.setMajorTickSpacing(25);
+        sliderVida.setPaintTicks(true);
+        sliderVida.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderVidaStateChanged(evt);
+            }
+        });
+        panelRegistroUsuario.add(sliderVida, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, -1, -1));
+
+        labelVidaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelVidaNum.setText("50");
+        panelRegistroUsuario.add(labelVidaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, -1, 20));
+
+        labelVelocidadNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelVelocidadNum.setText("50");
+        panelRegistroUsuario.add(labelVelocidadNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 260, -1, 20));
+
+        labelVelocidad.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelVelocidad.setText("Velocidad");
+        panelRegistroUsuario.add(labelVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, -1, -1));
+
+        labelInteligenciaNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelInteligenciaNum.setText("50");
+        panelRegistroUsuario.add(labelInteligenciaNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, 20));
+
+        labelInteligencia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelInteligencia.setText("Inteligencia");
+        panelRegistroUsuario.add(labelInteligencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+
+        sliderInteligencia.setMajorTickSpacing(25);
+        sliderInteligencia.setPaintTicks(true);
+        sliderInteligencia.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderInteligenciaStateChanged(evt);
+            }
+        });
+        panelRegistroUsuario.add(sliderInteligencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
+
+        sliderVelocidad.setMajorTickSpacing(25);
+        sliderVelocidad.setPaintTicks(true);
+        sliderVelocidad.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderVelocidadStateChanged(evt);
+            }
+        });
+        panelRegistroUsuario.add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
+
+        labelRecursosEco1.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelRecursosEco1.setText("Recursos Economicos");
+        panelRegistroUsuario.add(labelRecursosEco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, 20));
+
+        sliderRecursosEco.setMajorTickSpacing(25);
+        sliderRecursosEco.setPaintTicks(true);
+        sliderRecursosEco.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderRecursosEcoStateChanged(evt);
+            }
+        });
+        panelRegistroUsuario.add(sliderRecursosEco, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
+
+        labelRecursosEcoNum.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelRecursosEcoNum.setText("50");
+        panelRegistroUsuario.add(labelRecursosEcoNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, 20));
+
+        labelPoderText.setFont(new java.awt.Font("Comic Book", 0, 18)); // NOI18N
+        labelPoderText.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPoderText.setText("PODER");
+        labelPoderText.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        panelRegistroUsuario.add(labelPoderText, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 90, 40));
+
+        labelPoderNum.setFont(new java.awt.Font("Comic Book", 0, 18)); // NOI18N
+        labelPoderNum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPoderNum.setText("50");
+        labelPoderNum.setToolTipText("");
+        labelPoderNum.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        panelRegistroUsuario.add(labelPoderNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 40, 40));
+
+        inputFranquicia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        inputFranquicia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marvel", "DC", "Otro" }));
+        inputFranquicia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputFranquiciaActionPerformed(evt);
+            }
+        });
+        panelRegistroUsuario.add(inputFranquicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 130, -1));
+
+        labelFranquicia.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelFranquicia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelFranquicia.setText("Franquicia");
+        panelRegistroUsuario.add(labelFranquicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 80, 30));
+
+        panelRegistroUsuario.add(inputTipoDePersonaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 130, -1));
+
+        labelTipoDePersonaje.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelTipoDePersonaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTipoDePersonaje.setText("Tipo de Personaje");
+        panelRegistroUsuario.add(labelTipoDePersonaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 120, 30));
+
+        inputTipoDeClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTipoDeClaseActionPerformed(evt);
+            }
+        });
+        panelRegistroUsuario.add(inputTipoDeClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 130, -1));
+
+        labelTipoDeClase.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelTipoDeClase.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTipoDeClase.setText("Tipo de Clase");
+        panelRegistroUsuario.add(labelTipoDeClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 90, 30));
+        panelRegistroUsuario.add(inputPseudonimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 131, -1));
+
+        labelPseudonimo.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        labelPseudonimo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelPseudonimo.setText("Pseudonimo");
+        panelRegistroUsuario.add(labelPseudonimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 90, 30));
+
+        botonCorrecto.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
+        botonCorrecto.setText("Confirmar");
+        botonCorrecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCorrectoActionPerformed(evt);
+            }
+        });
+        panelRegistroUsuario.add(botonCorrecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 120, -1));
+
+        getContentPane().add(panelRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 760, 430));
 
         salir.setFont(new java.awt.Font("Comic Book", 0, 18)); // NOI18N
         salir.setForeground(new java.awt.Color(255, 255, 255));
