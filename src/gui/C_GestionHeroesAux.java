@@ -280,6 +280,12 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
         labelTipoDeClase.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelTipoDeClase.setText("Tipo de Clase");
         panelRegistroUsuario.add(labelTipoDeClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 90, 30));
+
+        inputPseudonimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPseudonimoActionPerformed(evt);
+            }
+        });
         panelRegistroUsuario.add(inputPseudonimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 131, -1));
 
         labelPseudonimo.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
@@ -333,21 +339,27 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
     private void botonCorrectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCorrectoActionPerformed
         if(inputNombre.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el nombre completo", "Error", JOptionPane.WARNING_MESSAGE);      
-        }else if (inputFecha.getDate() == null){
+            return;
+        }if (inputFecha.getDate() == null){
             JOptionPane.showMessageDialog(null, "Rellene la fecha de nacimiento", "Error", JOptionPane.WARNING_MESSAGE);
-        }else if (inputPseudonimo.getText().trim().isEmpty()){
-   
-        }else{
-            Personaje personaje = getInformacion();  
-            if (modo == 'a'){
-                ManejoJSON.guardarJSON(personaje, Personaje.RUTA);
-            } else if (modo == 'm'){
-                ManejoJSON.modificarJSON(personaje, C_GestionHeroes.slotSeleccionadoNum, Personaje.RUTA);
-            }
-            C_GestionHeroes gestionHeroes = new C_GestionHeroes();
-            gestionHeroes.setVisible(true);
-            this.dispose();
+            return;
+        }if (inputPseudonimo.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el pseudónimo", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
         }
+        Personaje personaje = getInformacion();  
+        if (modo == 'a'){
+            ManejoJSON.guardarJSON(personaje, Personaje.RUTA);
+            JOptionPane.showMessageDialog(null, "Personaje agregado correctamente");
+        } else if (modo == 'm'){
+            ManejoJSON.modificarJSON(personaje, C_GestionHeroes.slotSeleccionadoNum, Personaje.RUTA);
+            JOptionPane.showMessageDialog(null, "Personaje modificado correctamente");
+        }
+
+        C_GestionHeroes gestionHeroes = new C_GestionHeroes();
+        gestionHeroes.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_botonCorrectoActionPerformed
 
     private void botonAgregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarFotoActionPerformed
@@ -407,6 +419,10 @@ public class C_GestionHeroesAux extends javax.swing.JFrame {
         nf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_atrasMouseClicked
+
+    private void inputPseudonimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPseudonimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPseudonimoActionPerformed
 
     /**
      * @param args the command line arguments

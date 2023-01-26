@@ -975,10 +975,15 @@ public class C_GestionHeroes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void actualizarSlots() {
-        personajes = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
+        ArrayList<Personaje> lista = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
+        for (int i = 0; i < lista.size(); i++){
+            if (lista.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals((C_GestionHeroes.ciudad.getCiudad()))){
+                personajes.add(lista.get(i));
+            }
+        }
         ImageIcon mIcono = null;
         for (int i = 0; i < personajes.size(); i++){
-            if (personajes.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals((C_GestionHeroes.ciudad.getCiudad()))){
+            
                 slotsOcupados.get(i).setVisible(true);
                 slotsOcupados.get(i).setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));  
                 slotsVacios.get(i).setVisible(false);
@@ -1031,8 +1036,6 @@ public class C_GestionHeroes extends javax.swing.JFrame {
                     default -> {
                     }
                 }
-            } else {
-            }
             
             
         }
