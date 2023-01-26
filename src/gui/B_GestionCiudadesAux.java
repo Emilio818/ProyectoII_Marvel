@@ -68,6 +68,7 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputPais.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputPais.setForeground(new java.awt.Color(153, 153, 153));
+        inputPais.setText("Nombre de país");
         inputPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputPaisActionPerformed(evt);
@@ -83,6 +84,7 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputEstado.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputEstado.setForeground(new java.awt.Color(153, 153, 153));
+        inputEstado.setText("Nombre de estado");
         inputEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEstadoActionPerformed(evt);
@@ -104,6 +106,7 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputCiudad.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputCiudad.setForeground(new java.awt.Color(153, 153, 153));
+        inputCiudad.setText("Nombre de ciudad");
         inputCiudad.setDoubleBuffered(true);
         inputCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,11 +176,11 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEscenarioActionPerformed
 
     private void ConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmarMouseClicked
-        if(inputPais.getText().trim().isEmpty()){
+        if(inputPais.getText().trim().isEmpty() | inputPais.getText().equals("Nombre de país")){
             JOptionPane.showMessageDialog(null, "Rellene el país", "Error", JOptionPane.WARNING_MESSAGE);      
-        }else if (inputCiudad.getText().trim().isEmpty()){
+        }else if (inputCiudad.getText().trim().isEmpty() | inputCiudad.getText().equals("Nombre de ciudad")){
             JOptionPane.showMessageDialog(null, "Rellene la ciudad", "Error", JOptionPane.WARNING_MESSAGE);
-        }else if (inputEstado.getText().trim().isEmpty()){
+        }else if (inputEstado.getText().trim().isEmpty() | inputEstado.getText().equals("Nombre de estado")){
             JOptionPane.showMessageDialog(null, "Rellene el estado", "Error", JOptionPane.WARNING_MESSAGE); 
         }else{
             Ciudad ciudad = getInformacion();

@@ -6,7 +6,10 @@ package gui;
 
 import aplicacion.ManejoJSON;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logicadenegocios.Cliente;
+import logicadenegocios.ServidorLocal;
 import logicadenegocios.Usuario;
 
 /**
@@ -41,7 +44,7 @@ public class C_EliminarUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        confirmar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,13 +86,13 @@ public class C_EliminarUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 280));
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        confirmar.setText("Confirmar");
+        confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                confirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 110, 30));
+        jPanel1.add(confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 110, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 520, 410));
 
@@ -110,11 +113,15 @@ public class C_EliminarUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int linea = tabla.getSelectedRow();
-        ManejoJSON.borrarJSON(linea, Usuario.RUTA);
-        llenarTabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
+        if(tabla.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario a eliminar", "Error", JOptionPane.WARNING_MESSAGE);            
+        }else{
+            int linea = tabla.getSelectedRow();
+            ManejoJSON.borrarJSON(linea, Usuario.RUTA);
+            llenarTabla();
+        }
+    }//GEN-LAST:event_confirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,7 +160,7 @@ public class C_EliminarUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton confirmar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

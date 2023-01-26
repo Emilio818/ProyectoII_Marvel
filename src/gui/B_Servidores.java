@@ -6,6 +6,7 @@ package gui;
 
 import aplicacion.ManejoJSON;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicadenegocios.Cliente;
 import logicadenegocios.ServidorLocal;
@@ -170,15 +171,18 @@ public class B_Servidores extends javax.swing.JFrame {
     }//GEN-LAST:event_atrasMouseClicked
 
     private void unirsePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unirsePartidaMouseClicked
-        ArrayList<ServidorLocal> servidores = ManejoJSON.leerJSON(ServidorLocal.RUTA, ServidorLocal.class);
-        ServidorLocal servidorLocal = servidores.get(tabla.getSelectedRow());
-        B_Servidores.puertoSeleccionado = servidorLocal.getPuerto();
-        SeleccionarHeroe.ciudad = servidorLocal.getCiudad();
-        Cliente cliente = new Cliente();
-        SeleccionarHeroe sh = new SeleccionarHeroe("Cliente");
-        sh.setVisible(true);
-        this.dispose();
-        
+        if(tabla.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un servidor", "Error", JOptionPane.WARNING_MESSAGE);            
+        }else{
+            ArrayList<ServidorLocal> servidores = ManejoJSON.leerJSON(ServidorLocal.RUTA, ServidorLocal.class);
+            ServidorLocal servidorLocal = servidores.get(tabla.getSelectedRow());
+            B_Servidores.puertoSeleccionado = servidorLocal.getPuerto();
+            SeleccionarHeroe.ciudad = servidorLocal.getCiudad();
+            Cliente cliente = new Cliente();
+            SeleccionarHeroe sh = new SeleccionarHeroe("Cliente");
+            sh.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_unirsePartidaMouseClicked
 
     /**

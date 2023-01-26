@@ -115,6 +115,11 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         inputContraseña.setForeground(new java.awt.Color(153, 153, 153));
         inputContraseña.setText("jPasswordField1");
         inputContraseña.setBorder(null);
+        inputContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputContraseñaActionPerformed(evt);
+            }
+        });
         panelRegistroUsuario.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 130, -1));
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
@@ -291,13 +296,13 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     private void clickAñadir(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAñadir
         if(inputNombre.getText().trim().isEmpty() | inputNombre.getText().equals("Ingrese nombre")){
             JOptionPane.showMessageDialog(null, "Rellene el nombre", "Error", JOptionPane.WARNING_MESSAGE);      
-        }else if (inputApellidos.getText().trim().isEmpty()){
+        }else if (inputApellidos.getText().trim().isEmpty() | inputApellidos.getText().equals("Ingrese ambos apellidos")){
             JOptionPane.showMessageDialog(null, "Rellene los apellidos", "Error", JOptionPane.WARNING_MESSAGE);
-        }else if (inputCorreo.getText().trim().isEmpty()){
+        }else if (inputCorreo.getText().trim().isEmpty() | inputCorreo.getText().equals("Ingrese correo")){
             JOptionPane.showMessageDialog(null, "Rellene el correo", "Error", JOptionPane.WARNING_MESSAGE); 
-        }else if (inputContraseña.getPassword().length == 0){
+        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getText().equals("jPasswordField1")){
             JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);
-        }else if (inputUsuario.getText().trim().isEmpty()){
+        }else if (inputUsuario.getText().trim().isEmpty() | inputUsuario.getText().equals("Ingrese usuario válido")){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);
         }else{
             Usuario usuario = getInformacion();
@@ -306,6 +311,10 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario agregado");
         }
     }//GEN-LAST:event_clickAñadir
+
+    private void inputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputContraseñaActionPerformed
 
     /**
      * @param args the command line arguments

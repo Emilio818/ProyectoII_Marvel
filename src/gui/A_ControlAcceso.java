@@ -61,6 +61,7 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputUsuario.setForeground(new java.awt.Color(204, 204, 204));
+        inputUsuario.setText("Ingrese un nombre de usuario");
         inputUsuario.setBorder(null);
         inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -110,10 +111,16 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 293, 250, -1));
 
         inputContraseña.setForeground(new java.awt.Color(204, 204, 204));
+        inputContraseña.setText("contraseña");
         inputContraseña.setBorder(null);
         inputContraseña.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputContraseñaFocusLost(evt);
+            }
+        });
+        inputContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputContraseñaActionPerformed(evt);
             }
         });
         panelblanco.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, 30));
@@ -160,8 +167,8 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
         txtcontraseñaObligatoria.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         txtcontraseñaObligatoria.setForeground(new java.awt.Color(204, 0, 0));
-        txtcontraseñaObligatoria.setText("* Contraseña Obligatorio");
-        panelblanco.add(txtcontraseñaObligatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+        txtcontraseñaObligatoria.setText("* Contraseña Obligatoria");
+        panelblanco.add(txtcontraseñaObligatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 120, 30));
 
         getContentPane().add(panelblanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 340, 500));
 
@@ -181,22 +188,17 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
     private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
         
-        if(inputUsuario.getText().trim().isEmpty()){
+        if(inputUsuario.getText().trim().isEmpty() | inputUsuario.getText().equals("Ingrese un nombre de usuario")){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);         
             txtusuarioObligatorio.setVisible(true);
             
-        }else if (inputContraseña.getPassword().length == 0){
+        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getPassword().equals("contraseña")){
             JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);         
         }else{
             txtusuarioObligatorio.setVisible(false);
             txtcontraseñaObligatoria.setVisible(false);
-            
         }
-    
-        
-        
-        
-        
+                 
         ArrayList<Usuario> usuarios = ManejoJSON.leerJSON(Usuario.RUTA, Usuario.class);
         if (usuarios.isEmpty()){
             JOptionPane.showMessageDialog(null, "Error: Usuario no registrado");
@@ -255,6 +257,10 @@ public class A_ControlAcceso extends javax.swing.JFrame {
             txtcontraseñaObligatoria.setVisible(false);
         }
     }//GEN-LAST:event_inputContraseñaFocusLost
+
+    private void inputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputContraseñaActionPerformed
 
     /**
      * @param args the command line arguments
