@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import logicadenegocios.Cliente;
+import logicadenegocios.Conexion;
 import static logicadenegocios.Escenario.BOSQUE;
 import static logicadenegocios.Escenario.CIUDAD;
 import static logicadenegocios.Escenario.DESIERTO;
@@ -27,19 +28,25 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  * @author emifu
  */
 public class D_JuegoCliente extends javax.swing.JFrame {
-    private String host = "192.168.0.8";
-    private static int puerto;
+
+    private Conexion conexion;
     private Personaje personaje;
     
-    static Socket s;
     static DataInputStream din;
     static DataOutputStream dout;
     
-    public D_JuegoCliente(int puerto) {
-        D_JuegoCliente.puerto = puerto;
-        initComponents();
+    public D_JuegoCliente(Conexion conexion) {
+        this.conexion = conexion;
         this.setLocationRelativeTo(null);
+        initComponents();
         panelChat.setVisible(false);
+        
+        try {
+            conexion.setS(new Socket(conexion.getIp(), conexion.getSl().getPuerto()));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
     }   
     
 
@@ -236,22 +243,10 @@ public class D_JuegoCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new D_JuegoCliente(0).setVisible(true);
+                new D_JuegoCliente(null).setVisible(true);
             }
         });
-        try{
-            s = new Socket("192.168.0.3",puerto);
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-            String msgin="";
-            
-            while(!msgin.equals("exit")){
-                msgin = din.readUTF();
-                msg_area.setText(msg_area.getText().trim()+"\n Server\t"+msgin);
-            }
-        }catch (IOException e){
-            System.out.println(e);
-        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

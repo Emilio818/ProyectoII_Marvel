@@ -4,6 +4,14 @@
  */
 package gui;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logicadenegocios.Conexion;
 import logicadenegocios.ServidorLocal;
 
 /**
@@ -11,16 +19,16 @@ import logicadenegocios.ServidorLocal;
  * @author Ginge
  */
 public class PantallaEspera extends javax.swing.JFrame implements Runnable{
-    
-    private ServidorLocal servidorLocal;
+    private Conexion conexion;
     /**
      * Creates new form PantallaEspera
-     * @param servidorLocal
+     * @param conexion
      */
-    public PantallaEspera(ServidorLocal servidorLocal) {
-        this.servidorLocal = servidorLocal;
+    public PantallaEspera(Conexion conexion) {
+        this.conexion = conexion;
         this.setLocationRelativeTo(null);
         initComponents();
+ 
         
         Thread miHilo = new Thread(this);
         miHilo.start();
@@ -152,6 +160,16 @@ public class PantallaEspera extends javax.swing.JFrame implements Runnable{
 
     @Override
     public void run() {
+        try {
+            conexion.setSs(new ServerSocket(conexion.getSl().getPuerto()));
+            Socket s = conexion.getSs().accept();
+            
+            System.out.println("Conexion Realizada");
+            s.close();
+        } catch (IOException ex) {
+             System.out.println(ex.getMessage());
+             
+        }
         System.out.println("Estoy esperando un Cliente");
     }
 }

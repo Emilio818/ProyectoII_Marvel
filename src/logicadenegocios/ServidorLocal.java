@@ -6,8 +6,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +20,13 @@ import javax.swing.JFrame;
  * @author emifu
  */
 public class ServidorLocal {
-    private ServerSocket ss;
+    
+    
     
     private String nombre;
     private Ciudad ciudad;
     private String fechaCreacion;
-    private int puerto;
-    
+    private int puerto;  
  
     public static final File RUTA = new File("baseDatos/Servidores.json");
     
@@ -32,8 +34,7 @@ public class ServidorLocal {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.fechaCreacion = fechaCreacion;
-        this.puerto = puerto;
- 
+        this.puerto = puerto;  
     }
 
     public String getNombre() {
