@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logicadenegocios.Conexion;
+import logicadenegocios.Personaje;
 import logicadenegocios.ServidorLocal;
 
 /**
@@ -20,22 +21,20 @@ import logicadenegocios.ServidorLocal;
  */
 public class PantallaEspera extends javax.swing.JFrame implements Runnable{
     private Conexion conexion;
+    private Personaje personaje1;
     /**
      * Creates new form PantallaEspera
      * @param conexion
      */
-    public PantallaEspera(Conexion conexion) {
+    public PantallaEspera(Conexion conexion, Personaje personaje1) {
         this.conexion = conexion;
+        this.personaje1 = personaje1;
         this.setLocationRelativeTo(null);
         initComponents();
  
         
         Thread miHilo = new Thread(this);
         miHilo.start();
-        
-        //D_JuegoServidor js = new D_JuegoServidor();
-        //js.setVisible(true);
-        this.dispose();
     }
 
     /**
@@ -145,7 +144,7 @@ public class PantallaEspera extends javax.swing.JFrame implements Runnable{
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PantallaEspera(null).setVisible(true);
+                new PantallaEspera(null, null).setVisible(true);
             }
         });
     }
@@ -163,13 +162,16 @@ public class PantallaEspera extends javax.swing.JFrame implements Runnable{
         try {
             conexion.setSs(new ServerSocket(conexion.getSl().getPuerto()));
             Socket s = conexion.getSs().accept();
-            
-            System.out.println("Conexion Realizada");
+            conexion.setS(s);
             s.close();
+            conexion.getSs().close();
+            D_JuegoServidor js = new D_JuegoServidor(conexion, personaje1);
+            js.setVisible(true);
+            this.dispose();       
         } catch (IOException ex) {
              System.out.println(ex.getMessage());
              
         }
-        System.out.println("Estoy esperando un Cliente");
+
     }
 }

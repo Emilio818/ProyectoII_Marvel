@@ -16,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import logicadenegocios.Cliente;
+import logicadenegocios.Conexion;
 import logicadenegocios.Escenario;
+import logicadenegocios.Personaje;
 
 import logicadenegocios.ServidorLocal;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -25,36 +27,34 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author emifu
  */
-public class D_JuegoServidor extends javax.swing.JFrame {
+public class D_JuegoServidor extends javax.swing.JFrame implements Runnable{
     
-    private ServerSocket ss;
-    private Socket s;
+    private Conexion conexion;
+    private Personaje personaje1;
+    private Personaje personaje2;
+    
     private DataInputStream din;
     private DataOutputStream dout;
-    private ServidorLocal servidorLocal;
     
     /**
      * Creates new form Escenario
-     * @param servidorLocal
+     * @param conexion
+     * @param personaje1
      */
-    public D_JuegoServidor(ServidorLocal servidorLocal) {
-        this.servidorLocal = servidorLocal;
+    public D_JuegoServidor(Conexion conexion, Personaje personaje1) {
+        this.conexion = conexion;
+        this.personaje1 = personaje1;
         this.setLocationRelativeTo(null);
         initComponents();
         panelChat.setVisible(false);
         ponerBg();
+        
+        Thread cicloSecundario = new Thread(this);
+        cicloSecundario.start();
+        
         ponerSprites();
         
-        String ip = null;
-        try {
-            ip = InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException ex) {
-        }
         
-        try {
-            Socket s = new Socket(ip, servidorLocal.getPuerto());
-        } catch (IOException ex) {            
-        }
         
         
     }
@@ -70,9 +70,9 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         panelbg = new java.awt.Panel();
         panelChat = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        msg_area = new javax.swing.JTextArea();
-        msg_text = new javax.swing.JTextField();
-        msg_send = new javax.swing.JButton();
+        textArea = new javax.swing.JTextArea();
+        inputText = new javax.swing.JTextField();
+        botonEnviar = new javax.swing.JButton();
         slotPersonaje1 = new javax.swing.JPanel();
         slotPersonaje2 = new javax.swing.JPanel();
         infoPersonaje1 = new javax.swing.JPanel();
@@ -102,27 +102,27 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         panelChat.setOpaque(false);
         panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        msg_area.setColumns(20);
-        msg_area.setRows(5);
-        jScrollPane1.setViewportView(msg_area);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
 
         panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
 
-        msg_text.setText("Escribe algo . . .");
-        msg_text.addActionListener(new java.awt.event.ActionListener() {
+        inputText.setText("Escribe algo . . .");
+        inputText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_textActionPerformed(evt);
+                inputTextActionPerformed(evt);
             }
         });
-        panelChat.add(msg_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
+        panelChat.add(inputText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
 
-        msg_send.setText("Enviar");
-        msg_send.addActionListener(new java.awt.event.ActionListener() {
+        botonEnviar.setText("Enviar");
+        botonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_sendActionPerformed(evt);
+                botonEnviarActionPerformed(evt);
             }
         });
-        panelChat.add(msg_send, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
+        panelChat.add(botonEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
 
         panelbg.add(panelChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 360, 180));
 
@@ -202,13 +202,24 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void msg_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_textActionPerformed
+    private void inputTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_msg_textActionPerformed
+    }//GEN-LAST:event_inputTextActionPerformed
 
-    private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
-       
-    }//GEN-LAST:event_msg_sendActionPerformed
+    private void botonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnviarActionPerformed
+        try {
+            System.out.println("Servidor: Creando Socket");
+            Socket s = new Socket(conexion.getIp(), conexion.getSl().getPuerto());
+            dout = new DataOutputStream(s.getOutputStream());
+            dout.writeUTF(inputText.getText());
+            dout.close();
+            s.close();
+            System.out.println("Cliente: Cerrando Socket");
+        } catch (IOException ex) {
+            System.out.println("Wenas");
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_botonEnviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,7 +247,7 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new D_JuegoServidor(null).setVisible(true);
+                new D_JuegoServidor(null, null).setVisible(true);
             }
         });
     }
@@ -246,8 +257,10 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barVida1;
     private javax.swing.JProgressBar barVida2;
+    private javax.swing.JButton botonEnviar;
     private javax.swing.JPanel infoPersonaje1;
     private javax.swing.JPanel infoPersonaje2;
+    private javax.swing.JTextField inputText;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -259,13 +272,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private javax.swing.JLabel labelNombre2;
     private javax.swing.JLabel labelVida;
     private javax.swing.JLabel labelVida1;
-    private static javax.swing.JTextArea msg_area;
-    private javax.swing.JButton msg_send;
-    private javax.swing.JTextField msg_text;
     private javax.swing.JPanel panelChat;
     private java.awt.Panel panelbg;
     private javax.swing.JPanel slotPersonaje1;
     private javax.swing.JPanel slotPersonaje2;
+    private static javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 
 
@@ -294,7 +305,8 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     
     }
     private void ponerBg() {
-        switch (servidorLocal.getCiudad().getEscenario()) {
+        Escenario escenario = conexion.getSl().getCiudad().getEscenario();
+        switch ( escenario ) {
             case CIUDAD -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
             case MONTAÑA -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Montaña.jpg"))); // NOI18N
             case BOSQUE -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Bosque.jpg"))); // NOI18N
@@ -302,5 +314,34 @@ public class D_JuegoServidor extends javax.swing.JFrame {
             default -> {
             }
         }
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Server: Iniciando rama segundaria");
+        try {
+            conexion.setSs(new ServerSocket(conexion.getSl().getPuerto()));
+            while (true){
+                System.out.println("Server: Esperando Instruccion");
+                Socket s = conexion.getSs().accept();  
+                System.out.println("Server: Instruccion aceptada");
+                din = new DataInputStream(s.getInputStream());
+                String textDin = din.readUTF();
+
+                evento(textDin);
+                s.close();
+                System.out.println("Server: Instruccion Finalizada");
+                }
+ 
+            
+        } catch (IOException ex) {
+            System.out.println("Server: Error");
+            System.out.println(ex.getMessage());    
+        }
+    }
+
+    private void evento(String textDin) {
+        System.out.println("Mensaje Recibido");
+        textArea.setText(textDin + "\n");
     }
 }   

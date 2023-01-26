@@ -582,14 +582,17 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
-        Conexion conexion = new Conexion(servidorLocal);
         if (slotSeleccionadoNum == -1){
             JOptionPane.showMessageDialog(null, "Seleccione un héroe");
-        }else if ( tipo.equals("Servidor")){  
-            PantallaEspera pe = new PantallaEspera(conexion);
+            return;
+        }
+        Conexion conexion = new Conexion(servidorLocal);
+        Personaje personajeSeleccionado = personajes.get(slotSeleccionadoNum);
+        if ( tipo.equals("Servidor")){  
+            PantallaEspera pe = new PantallaEspera(conexion, personajeSeleccionado);
             pe.setVisible(true);          
         } else {
-            D_JuegoCliente jc = new D_JuegoCliente(conexion);
+            D_JuegoCliente jc = new D_JuegoCliente(conexion, personajeSeleccionado);
             jc.setVisible(true);
             
         }     
