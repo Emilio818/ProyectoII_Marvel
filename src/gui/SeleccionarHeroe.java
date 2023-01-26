@@ -580,6 +580,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
+        
         if ( tipo.equals("Servidor")){  
             D_JuegoServidor ph = new D_JuegoServidor(servidorLocal);
             ph.setVisible(true);          

@@ -8,8 +8,10 @@ import java.awt.Image;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -39,10 +41,16 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         this.servidorLocal = servidorLocal;
         this.setLocationRelativeTo(null);
         initComponents();
-        
-        
+        panelChat.setVisible(false);
         ponerBg();
         ponerSprites();
+        
+        try {
+            String ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+        }
+        
+        Socket s = new Socket();
         
         
     }
@@ -56,6 +64,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private void initComponents() {
 
         panelbg = new java.awt.Panel();
+        panelChat = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        msg_area = new javax.swing.JTextArea();
+        msg_text = new javax.swing.JTextField();
+        msg_send = new javax.swing.JButton();
         slotPersonaje1 = new javax.swing.JPanel();
         slotPersonaje2 = new javax.swing.JPanel();
         infoPersonaje1 = new javax.swing.JPanel();
@@ -72,11 +85,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         labelBg = new javax.swing.JLabel();
-        panelChat = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        msg_area = new javax.swing.JTextArea();
-        msg_text = new javax.swing.JTextField();
-        msg_send = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,6 +94,33 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         panelbg.setName(""); // NOI18N
         panelbg.setPreferredSize(new java.awt.Dimension(900, 500));
         panelbg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelChat.setOpaque(false);
+        panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        msg_area.setColumns(20);
+        msg_area.setRows(5);
+        jScrollPane1.setViewportView(msg_area);
+
+        panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
+
+        msg_text.setText("Escribe algo . . .");
+        msg_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_textActionPerformed(evt);
+            }
+        });
+        panelChat.add(msg_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
+
+        msg_send.setText("Enviar");
+        msg_send.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_sendActionPerformed(evt);
+            }
+        });
+        panelChat.add(msg_send, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
+
+        panelbg.add(panelChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 360, 180));
 
         slotPersonaje1.setOpaque(false);
         slotPersonaje1.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -150,33 +185,6 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         panelbg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 30));
         panelbg.add(labelBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        panelChat.setOpaque(false);
-        panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        msg_area.setColumns(20);
-        msg_area.setRows(5);
-        jScrollPane1.setViewportView(msg_area);
-
-        panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
-
-        msg_text.setText("Escribe algo . . .");
-        msg_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_textActionPerformed(evt);
-            }
-        });
-        panelChat.add(msg_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
-
-        msg_send.setText("Enviar");
-        msg_send.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msg_sendActionPerformed(evt);
-            }
-        });
-        panelChat.add(msg_send, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
-
-        panelbg.add(panelChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
-
         getContentPane().add(panelbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -195,13 +203,7 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_msg_textActionPerformed
 
     private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
-        try{
-            String msgout;
-            msgout = msg_text.getText().trim();
-            dout.writeUTF(msgout);
-        }catch(IOException e){
-            System.out.println(e);
-        }
+       
     }//GEN-LAST:event_msg_sendActionPerformed
 
     /**
