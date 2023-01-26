@@ -289,10 +289,22 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_labelEliminarMouseClicked
 
     private void clickAñadir(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAñadir
-        Usuario usuario = getInformacion();
-        ManejoJSON.guardarJSON(usuario, Usuario.RUTA);
-        limpiarInputs();
-        JOptionPane.showMessageDialog(null, "Usuario agregado");
+        if(inputNombre.getText().trim().isEmpty() | inputNombre.getText().equals("Ingrese nombre")){
+            JOptionPane.showMessageDialog(null, "Rellene el nombre", "Error", JOptionPane.WARNING_MESSAGE);      
+        }else if (inputApellidos.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene los apellidos", "Error", JOptionPane.WARNING_MESSAGE);
+        }else if (inputCorreo.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el correo", "Error", JOptionPane.WARNING_MESSAGE); 
+        }else if (inputContraseña.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);
+        }else if (inputUsuario.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            Usuario usuario = getInformacion();
+            ManejoJSON.guardarJSON(usuario, Usuario.RUTA);
+            limpiarInputs();
+            JOptionPane.showMessageDialog(null, "Usuario agregado");
+        }
     }//GEN-LAST:event_clickAñadir
 
     /**

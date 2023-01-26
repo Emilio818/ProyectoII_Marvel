@@ -174,29 +174,24 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
     private void ConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmarMouseClicked
         if(inputPais.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Rellene el país", "Error", JOptionPane.WARNING_MESSAGE);         
-            
+            JOptionPane.showMessageDialog(null, "Rellene el país", "Error", JOptionPane.WARNING_MESSAGE);      
         }else if (inputCiudad.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);         
+            JOptionPane.showMessageDialog(null, "Rellene la ciudad", "Error", JOptionPane.WARNING_MESSAGE);
         }else if (inputEstado.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE); 
+            JOptionPane.showMessageDialog(null, "Rellene el estado", "Error", JOptionPane.WARNING_MESSAGE); 
         }else{
-            
-            
+            Ciudad ciudad = getInformacion();
+            if (modo == 'a'){
+                ManejoJSON.guardarJSON(ciudad, Ciudad.RUTA);
+            } else if (modo == 'm'){
+                ManejoJSON.modificarJSON(ciudad, B_GestionCiudades.slotSeleccionadoNum, Ciudad.RUTA);
+            }
+            B_GestionCiudades gestionCiudades = new B_GestionCiudades();
+            gestionCiudades.setVisible(true);
+            this.dispose();
         }
-        
-        
-        Ciudad ciudad = getInformacion();
-        if (modo == 'a'){
-            ManejoJSON.guardarJSON(ciudad, Ciudad.RUTA);
-        } else if (modo == 'm'){
-            ManejoJSON.modificarJSON(ciudad, B_GestionCiudades.slotSeleccionadoNum, Ciudad.RUTA);
-        }
-        B_GestionCiudades gestionCiudades = new B_GestionCiudades();
-        gestionCiudades.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_ConfirmarMouseClicked
-
+    
     /**
      * @param args the command line arguments
      */
