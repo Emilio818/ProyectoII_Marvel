@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import logicadenegocios.Cliente;
+import logicadenegocios.Escenario;
 
 import logicadenegocios.ServidorLocal;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -24,23 +25,23 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  */
 public class D_JuegoServidor extends javax.swing.JFrame {
     
-    static ServerSocket ss;
-    static Socket s;
-    static DataInputStream din;
-    static DataOutputStream dout;
+    private ServerSocket ss;
+    private Socket s;
+    private DataInputStream din;
+    private DataOutputStream dout;
+    private ServidorLocal servidorLocal;
     
     /**
      * Creates new form Escenario
+     * @param servidorLocal
      */
-    public D_JuegoServidor() {
-        initComponents();
+    public D_JuegoServidor(ServidorLocal servidorLocal) {
+        this.servidorLocal = servidorLocal;
         this.setLocationRelativeTo(null);
+        initComponents();
         
-        PanelChatServidor chat = new PanelChatServidor();
-        chat.setSize(360, 180);
-        chat.setLocation(0, 0);
-        chat.setVisible(false);
         
+        ponerBg();
         ponerSprites();
         
         
@@ -71,6 +72,11 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         labelBg = new javax.swing.JLabel();
+        panelChat = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        msg_area = new javax.swing.JTextArea();
+        msg_text = new javax.swing.JTextField();
+        msg_send = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,9 +148,34 @@ public class D_JuegoServidor extends javax.swing.JFrame {
             }
         });
         panelbg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 30));
-
-        labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
         panelbg.add(labelBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        panelChat.setOpaque(false);
+        panelChat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        msg_area.setColumns(20);
+        msg_area.setRows(5);
+        jScrollPane1.setViewportView(msg_area);
+
+        panelChat.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 120));
+
+        msg_text.setText("Escribe algo . . .");
+        msg_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_textActionPerformed(evt);
+            }
+        });
+        panelChat.add(msg_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 260, 30));
+
+        msg_send.setText("Enviar");
+        msg_send.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_sendActionPerformed(evt);
+            }
+        });
+        panelChat.add(msg_send, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 70, 30));
+
+        panelbg.add(panelChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
         getContentPane().add(panelbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -158,6 +189,20 @@ public class D_JuegoServidor extends javax.swing.JFrame {
             panelChat.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void msg_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_textActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_msg_textActionPerformed
+
+    private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
+        try{
+            String msgout;
+            msgout = msg_text.getText().trim();
+            dout.writeUTF(msgout);
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_msg_sendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,27 +230,12 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new D_JuegoServidor().setVisible(true);
+                new D_JuegoServidor(null).setVisible(true);
             }
         });
-        String msgin = "";
-        try{
-            ss = new ServerSocket(5000);
-            s = ss.accept();
-            System.out.println("ConexionLograda");
-            
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-            
-            while(!msgin.equals("exit")){
-              msgin = din.readUTF();
-              msg_area.setText(msg_area.getText().trim()+"\n"+msgin);
-            }
-        
-        }catch (IOException ex) {
-        }
-        
     }
+
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barVida1;
@@ -217,11 +247,16 @@ public class D_JuegoServidor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBg;
     private javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelNombre2;
     private javax.swing.JLabel labelVida;
     private javax.swing.JLabel labelVida1;
+    private static javax.swing.JTextArea msg_area;
+    private javax.swing.JButton msg_send;
+    private javax.swing.JTextField msg_text;
+    private javax.swing.JPanel panelChat;
     private java.awt.Panel panelbg;
     private javax.swing.JPanel slotPersonaje1;
     private javax.swing.JPanel slotPersonaje2;
@@ -252,4 +287,14 @@ public class D_JuegoServidor extends javax.swing.JFrame {
         // Fondo Correspondiente*/
     
     }
-}
+    private void ponerBg() {
+        switch (servidorLocal.getCiudad().getEscenario()) {
+            case CIUDAD -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Ciudad.jpg"))); // NOI18N
+            case MONTAÑA -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Montaña.jpg"))); // NOI18N
+            case BOSQUE -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Bosque.jpg"))); // NOI18N
+            case DESIERTO -> labelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/bg/Desierto.jpg"))); // NOI18N
+            default -> {
+            }
+        }
+    }
+}   

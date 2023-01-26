@@ -212,7 +212,7 @@ public class B_CrearPartida extends javax.swing.JFrame {
         String strDate = dateTime.format(dateFormat);
         ArrayList servidores = ManejoJSON.leerJSON(ServidorLocal.RUTA, ServidorLocal.class);
         ServidorLocal servidor = new ServidorLocal(nombre, ciudad, strDate, 5000 + servidores.size() );
-        SeleccionarHeroe sh = new SeleccionarHeroe("Servidor");
+        SeleccionarHeroe sh = new SeleccionarHeroe("Servidor", servidor);
         ManejoJSON.guardarJSON(servidor, ServidorLocal.RUTA);
         sh.setVisible(true);
         this.dispose();}

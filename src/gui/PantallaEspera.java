@@ -20,8 +20,8 @@ public class PantallaEspera extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        D_JuegoServidor js = new D_JuegoServidor();
-        js.setVisible(true);
+        //D_JuegoServidor js = new D_JuegoServidor();
+        //js.setVisible(true);
         this.dispose();
     }
 

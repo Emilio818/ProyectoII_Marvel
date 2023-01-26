@@ -176,8 +176,8 @@ public class B_Servidores extends javax.swing.JFrame {
             B_Servidores.puertoSeleccionado = servidorLocal.getPuerto();
             SeleccionarHeroe.ciudad = servidorLocal.getCiudad();
             Cliente cliente = new Cliente();
-            SeleccionarHeroe sh = new SeleccionarHeroe("Cliente");
-            sh.setVisible(true);
+            //SeleccionarHeroe sh = new SeleccionarHeroe("Cliente");
+            //sh.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_unirsePartidaMouseClicked

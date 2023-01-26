@@ -1,7 +1,12 @@
 package gui;
 
 import aplicacion.ManejoJSON;
+import aplicacion.ManejoJSON;
+import gui.B_Servidores;
+import gui.D_JuegoCliente;
+import gui.D_JuegoServidor;
 import static aplicacion.ManejoJSON.borrarTodoJSON;
+import static gui.C_GestionHeroes.ciudad;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +31,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     public static int slotSeleccionadoNum = -1;
     private ArrayList<Personaje> personajes;
     public static Ciudad ciudad;
+    private ServidorLocal servidorLocal;
     
     private ArrayList<javax.swing.JPanel> slotsOcupados;
     private ArrayList<javax.swing.JLabel> slotsVacios;
@@ -39,9 +45,11 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     /**
      * Creates new form I_MenuInicio
      * @param tipo
+     * @param servidorLocal
      */
-    public SeleccionarHeroe(String tipo) {
+    public SeleccionarHeroe(String tipo, ServidorLocal servidorLocal) {
         this.tipo = tipo;
+        this.servidorLocal = servidorLocal;
         this.personajes = new ArrayList<>();
         this.slotsOcupados = new ArrayList<>();
         this.slotsVacios = new ArrayList<>();
@@ -573,9 +581,8 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
 
     private void botonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeleccionarActionPerformed
         if ( tipo.equals("Servidor")){  
-            D_JuegoServidor ph = new D_JuegoServidor();
-            ph.setVisible(true);
-            
+            D_JuegoServidor ph = new D_JuegoServidor(servidorLocal);
+            ph.setVisible(true);          
         } else {
             D_JuegoCliente jc = new D_JuegoCliente( B_Servidores.puertoSeleccionado);
             jc.setVisible(true);
@@ -703,7 +710,7 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new SeleccionarHeroe(null).setVisible(true);
+                new SeleccionarHeroe(null, null).setVisible(true);
             }
         });
     }
@@ -806,66 +813,68 @@ public class SeleccionarHeroe extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void actualizarSlots() {
-        personajes = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
+        ArrayList<Personaje> filtro = new ArrayList();
+        filtro = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
+        for (int i = 0; i < filtro.size(); i++){
+            if ( filtro.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals(ciudad.getCiudad()) ){
+                personajes.add(filtro.get(i));            
+            } 
+        }
         ImageIcon mIcono = null;
         for (int i = 0; i < personajes.size(); i++){
-            if (personajes.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals((SeleccionarHeroe.ciudad.getCiudad()))){
-                slotsOcupados.get(i).setVisible(true);
-                slotsOcupados.get(i).setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));  
-                slotsVacios.get(i).setVisible(false);
+            
+            slotsOcupados.get(i).setVisible(true);
+            slotsOcupados.get(i).setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));  
+            slotsVacios.get(i).setVisible(false);
 
-                //Nombre
-                nombres.get(i).setText(personajes.get(i).getpDatosHeroe().getmPseudonimo());
-                //Icono Clase
-                switch (personajes.get(i).getpDatosHeroe().getpTipoDeClase()) {
-                    case HABIL -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseHabil.png")));
-                    case TECNOLOGICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseTecnologico.png")));
-                    case COSMICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseCosmico.png")));
-                    case MISTICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseMistico.png")));
-                    case MUTANTE -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseMutante.png")));
-                    default -> {
-                    }
+            //Nombre
+            nombres.get(i).setText(personajes.get(i).getpDatosHeroe().getmPseudonimo());
+            //Icono Clase
+            switch (personajes.get(i).getpDatosHeroe().getpTipoDeClase()) {
+                case HABIL -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseHabil.png")));
+                case TECNOLOGICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseTecnologico.png")));
+                case COSMICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseCosmico.png")));
+                case MISTICO -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseMistico.png")));
+                case MUTANTE -> clases.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/claseMutante.png")));
+                default -> {
                 }
-                //Icono Tipo Personaje
-                switch (personajes.get(i).getpDatosHeroe().getpTipoDePersonaje()) {
-                    case ANTIHEROE -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/antiheroe.png")));
-                    case HEROE -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/heroe.png")));
-                    case VILLANO -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/villano.png")));
-                    default -> {
-                    }
-                }
-
-                //Estadisticas
-                Poder tPoder = personajes.get(i).getpDatosHeroe().getpPoder();
-                String tStats = "HP: " + tPoder.getpVida() + " F: " + tPoder.getpFuerza()
-                        + " V: " + tPoder.getpVelocidad() + " I: " + tPoder.getpInteligencia()
-                        + " RE: " + tPoder.getpRecursosEconomicos();
-                stats.get(i).setText(tStats);
-
-                //Poder Total
-                int tPoderTotal = personajes.get(i).getpDatosHeroe().getpPoder().poderTotal();
-                poderes.get(i).setText("" + tPoderTotal);
-
-                // Imagen Fondo
-
-                switch (personajes.get(i).getpDatosHeroe().getmPseudonimo()) {
-                    case "BrujaEscarlata" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/BrujaEscarlata/lowerThird.png")));
-                    case "Carnage" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Carnage/lowerThird.png")));
-                    case "Daredevil" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Daredevil/lowerThird.png")));
-                    case "Deadpool" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Deadpool/lowerThird.png")));
-                    case "Morgan" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Morgan/lowerThird.png")));
-                    case "Quicksilver" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Quicksilver/lowerThird.png")));
-                    case "Rocket" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Rocket/lowerThird.png")));
-                    case "Ultron" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Ultron/lowerThird.png")));
-                    case "Venom" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Venom/lowerThird.png")));
-                    case "Viper" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Viper/lowerThird.png")));
-                    default -> {
-                    }
-                }
-            } else {
             }
-            
-            
+            //Icono Tipo Personaje
+            switch (personajes.get(i).getpDatosHeroe().getpTipoDePersonaje()) {
+                case ANTIHEROE -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/antiheroe.png")));
+                case HEROE -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/heroe.png")));
+                case VILLANO -> tipos.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/iconos/villano.png")));
+                default -> {
+                }
+            }
+
+            //Estadisticas
+            Poder tPoder = personajes.get(i).getpDatosHeroe().getpPoder();
+            String tStats = "HP: " + tPoder.getpVida() + " F: " + tPoder.getpFuerza()
+                    + " V: " + tPoder.getpVelocidad() + " I: " + tPoder.getpInteligencia()
+                    + " RE: " + tPoder.getpRecursosEconomicos();
+            stats.get(i).setText(tStats);
+
+            //Poder Total
+            int tPoderTotal = personajes.get(i).getpDatosHeroe().getpPoder().poderTotal();
+            poderes.get(i).setText("" + tPoderTotal);
+
+            // Imagen Fondo
+
+            switch (personajes.get(i).getpDatosHeroe().getmPseudonimo()) {
+                case "BrujaEscarlata" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/BrujaEscarlata/lowerThird.png")));
+                case "Carnage" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Carnage/lowerThird.png")));
+                case "Daredevil" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Daredevil/lowerThird.png")));
+                case "Deadpool" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Deadpool/lowerThird.png")));
+                case "Morgan" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Morgan/lowerThird.png")));
+                case "Quicksilver" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Quicksilver/lowerThird.png")));
+                case "Rocket" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Rocket/lowerThird.png")));
+                case "Ultron" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Ultron/lowerThird.png")));
+                case "Venom" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Venom/lowerThird.png")));
+                case "Viper" -> imagenes.get(i).setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Viper/lowerThird.png")));
+                default -> {
+                }
+            }
         }
     }
     
