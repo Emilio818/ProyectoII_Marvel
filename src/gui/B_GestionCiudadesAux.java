@@ -64,17 +64,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputPais.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputPais.setForeground(new java.awt.Color(153, 153, 153));
-        inputPais.setText("Nombre de pais");
-        inputPais.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputPaisFocusLost(evt);
-            }
-        });
-        inputPais.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inputPaisMouseClicked(evt);
-            }
-        });
         panel1.add(inputPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
 
         labelPais.setFont(new java.awt.Font("Comic Book", 0, 24)); // NOI18N
@@ -85,17 +74,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputEstado.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputEstado.setForeground(new java.awt.Color(153, 153, 153));
-        inputEstado.setText("Nombre de estado");
-        inputEstado.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputEstadoFocusLost(evt);
-            }
-        });
-        inputEstado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inputEstadoMouseClicked(evt);
-            }
-        });
         panel1.add(inputEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, 30));
 
         labelEstado.setFont(new java.awt.Font("Comic Book", 0, 24)); // NOI18N
@@ -112,18 +90,7 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
 
         inputCiudad.setFont(new java.awt.Font("Comic Book", 0, 12)); // NOI18N
         inputCiudad.setForeground(new java.awt.Color(153, 153, 153));
-        inputCiudad.setText("Nombre de ciudad");
         inputCiudad.setDoubleBuffered(true);
-        inputCiudad.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                inputCiudadFocusLost(evt);
-            }
-        });
-        inputCiudad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inputCiudadMouseClicked(evt);
-            }
-        });
         panel1.add(inputCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 170, 30));
 
         labelCiudad.setFont(new java.awt.Font("Comic Book", 0, 24)); // NOI18N
@@ -216,13 +183,13 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEscenarioActionPerformed
 
     private void ConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmarMouseClicked
-       if(inputPais.getText().trim().isEmpty() | inputPais.getText().equals("Nombre de pais")){
+       if(inputPais.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el país", "Error", JOptionPane.WARNING_MESSAGE);  
             return;
-        }if (inputCiudad.getText().trim().isEmpty() | inputCiudad.getText().equals("Nombre de ciudad")){
+        }if (inputCiudad.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene la ciudad", "Error", JOptionPane.WARNING_MESSAGE);
             return;
-        }if (inputEstado.getText().trim().isEmpty() | inputEstado.getText().equals("Nombre de estado")){
+        }if (inputEstado.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el estado", "Error", JOptionPane.WARNING_MESSAGE); 
             return;
         }
@@ -247,30 +214,6 @@ public class B_GestionCiudadesAux extends javax.swing.JFrame {
         nf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AtrasMouseClicked
-
-    private void inputPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputPaisMouseClicked
-        inputPais.setText("");
-    }//GEN-LAST:event_inputPaisMouseClicked
-
-    private void inputPaisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPaisFocusLost
-        inputPais.setText("Ingrese un país");
-    }//GEN-LAST:event_inputPaisFocusLost
-
-    private void inputCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputCiudadMouseClicked
-        inputCiudad.setText("");
-    }//GEN-LAST:event_inputCiudadMouseClicked
-
-    private void inputCiudadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCiudadFocusLost
-        inputCiudad.setText("Ingrese una ciudad");
-    }//GEN-LAST:event_inputCiudadFocusLost
-
-    private void inputEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputEstadoMouseClicked
-        inputEstado.setText("");
-    }//GEN-LAST:event_inputEstadoMouseClicked
-
-    private void inputEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEstadoFocusLost
-        inputEstado.setText("Ingrese un estado");
-    }//GEN-LAST:event_inputEstadoFocusLost
 
     /**
      * @param args the command line arguments

@@ -479,7 +479,9 @@ public class SeleccionarCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSeleccionarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        // TODO add your handling code here:
+        B_CrearPartida nf = new B_CrearPartida();
+        nf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void clickSlot1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickSlot1

@@ -61,16 +61,10 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        inputUsuario.setText("Ingrese un nombre de usuario");
         inputUsuario.setBorder(null);
         inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputUsuarioFocusLost(evt);
-            }
-        });
-        inputUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inputUsuarioMouseClicked(evt);
             }
         });
         panelblanco.add(inputUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 20));
@@ -106,21 +100,10 @@ public class A_ControlAcceso extends javax.swing.JFrame {
         panelblanco.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 293, 250, -1));
 
         inputContraseña.setForeground(new java.awt.Color(204, 204, 204));
-        inputContraseña.setText("contraseña");
         inputContraseña.setBorder(null);
         inputContraseña.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputContraseñaFocusLost(evt);
-            }
-        });
-        inputContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                inputContraseñaMouseClicked(evt);
-            }
-        });
-        inputContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputContraseñaActionPerformed(evt);
             }
         });
         panelblanco.add(inputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, 30));
@@ -188,16 +171,18 @@ public class A_ControlAcceso extends javax.swing.JFrame {
 
     private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
         
-        if(inputUsuario.getText().trim().isEmpty() | inputUsuario.getText().equals("Ingrese un nombre de usuario")){
+        if(inputUsuario.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);         
             txtusuarioObligatorio.setVisible(true);
+            return;
             
-        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getPassword().equals("contraseña")){
-            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);         
-        }else{
-            txtusuarioObligatorio.setVisible(false);
-            txtcontraseñaObligatoria.setVisible(false);
-        }
+        }else if (inputContraseña.getPassword().length == 0){
+            JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);  
+            return;}
+        
+        txtusuarioObligatorio.setVisible(false);
+        txtcontraseñaObligatoria.setVisible(false);
+        
                  
         ArrayList<Usuario> usuarios = ManejoJSON.leerJSON(Usuario.RUTA, Usuario.class);
         if (usuarios.isEmpty()){
@@ -229,40 +214,28 @@ public class A_ControlAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_salirMouseClicked
 
     private void registroUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroUsuarioMouseClicked
+        
         B_RegistroUsuario nf = new B_RegistroUsuario();
         nf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registroUsuarioMouseClicked
 
-    private void inputUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseClicked
-         inputUsuario.setText("");
-    }//GEN-LAST:event_inputUsuarioMouseClicked
-
-    private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
-        inputUsuario.setText("Ingrese un nombre de usuario");
-        if(inputUsuario.getText().trim().isEmpty()){
-        txtusuarioObligatorio.setVisible(true);
-        }else{
-            txtusuarioObligatorio.setVisible(false);
-        }
-    }//GEN-LAST:event_inputUsuarioFocusLost
-
     private void inputContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContraseñaFocusLost
-        inputUsuario.setText("Contraseña");
         if(inputContraseña.getPassword().length == 0){
-        txtcontraseñaObligatoria.setVisible(true);
+            txtcontraseñaObligatoria.setVisible(true);
         }else{
             txtcontraseñaObligatoria.setVisible(false);
         }
     }//GEN-LAST:event_inputContraseñaFocusLost
 
-    private void inputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputContraseñaActionPerformed
-        inputUsuario.setText("");
-    }//GEN-LAST:event_inputContraseñaActionPerformed
+    private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
 
-    private void inputContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputContraseñaMouseClicked
-        inputContraseña.setText("");
-    }//GEN-LAST:event_inputContraseñaMouseClicked
+        if(inputUsuario.getText().trim().isEmpty()){
+            txtusuarioObligatorio.setVisible(true);
+        }else{
+            txtusuarioObligatorio.setVisible(false);
+        }
+    }//GEN-LAST:event_inputUsuarioFocusLost
 
     /**
      * @param args the command line arguments
