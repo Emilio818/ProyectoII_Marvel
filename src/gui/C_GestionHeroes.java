@@ -975,10 +975,11 @@ public class C_GestionHeroes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void actualizarSlots() {
-        ArrayList<Personaje> lista = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
-        for (int i = 0; i < lista.size(); i++){
-            if (lista.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals((C_GestionHeroes.ciudad.getCiudad()))){
-                personajes.add(lista.get(i));
+        
+        ArrayList<Personaje> listaTemp = ManejoJSON.leerJSON(Personaje.RUTA, Personaje.class);
+        for (int i = 0; i < listaTemp.size(); i++){
+            if (listaTemp.get(i).getpDatosPersonales().getpCiudad().getCiudad().equals(C_GestionHeroes.ciudad.getCiudad())){
+                personajes.add(listaTemp.get(i));
             }
         }
         ImageIcon mIcono = null;
