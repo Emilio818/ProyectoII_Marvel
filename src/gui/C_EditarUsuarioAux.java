@@ -13,12 +13,12 @@ import logicadenegocios.Usuario;
  *
  * @author Ginge
  */
-public class B_RegistroUsuario extends javax.swing.JFrame {
+public class C_EditarUsuarioAux extends javax.swing.JFrame {
 
     /**
      * Creates new form B_RegistroUsuario
      */
-    public B_RegistroUsuario() {
+    public C_EditarUsuarioAux() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -51,10 +51,6 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         labelRegistroUsuario = new javax.swing.JLabel();
         panelAñadir = new javax.swing.JPanel();
         labelAñadir = new javax.swing.JLabel();
-        panelEditar = new javax.swing.JPanel();
-        labelEditar = new javax.swing.JLabel();
-        panelEliminar = new javax.swing.JPanel();
-        labelEliminar = new javax.swing.JLabel();
         panelAtras = new javax.swing.JPanel();
         labelAtras = new javax.swing.JLabel();
         panelSalir = new javax.swing.JPanel();
@@ -138,7 +134,7 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         panelRegistroUsuario.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 130, 10));
 
         labelRegistroUsuario.setFont(new java.awt.Font("Comic Book", 1, 24)); // NOI18N
-        labelRegistroUsuario.setText("Registro de Usuario");
+        labelRegistroUsuario.setText("Editar Usuario");
         panelRegistroUsuario.add(labelRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 490, -1));
 
         panelAñadir.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,75 +153,19 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
         panelAñadir.setLayout(panelAñadirLayout);
         panelAñadirLayout.setHorizontalGroup(
             panelAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAñadirLayout.createSequentialGroup()
+            .addGroup(panelAñadirLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelAñadir, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(labelAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelAñadirLayout.setVerticalGroup(
             panelAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAñadirLayout.createSequentialGroup()
-                .addComponent(labelAñadir)
-                .addGap(0, 2, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAñadirLayout.createSequentialGroup()
+                .addGap(0, 2, Short.MAX_VALUE)
+                .addComponent(labelAñadir))
         );
 
-        panelRegistroUsuario.add(panelAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, 20));
-
-        panelEditar.setBackground(new java.awt.Color(255, 255, 255));
-
-        labelEditar.setBackground(new java.awt.Color(255, 255, 255));
-        labelEditar.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
-        labelEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEditar.setText("Editar");
-        labelEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelEditarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
-        panelEditar.setLayout(panelEditarLayout);
-        panelEditarLayout.setHorizontalGroup(
-            panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        panelEditarLayout.setVerticalGroup(
-            panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEditarLayout.createSequentialGroup()
-                .addComponent(labelEditar)
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        panelRegistroUsuario.add(panelEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, 20));
-
-        panelEliminar.setBackground(new java.awt.Color(255, 255, 255));
-
-        labelEliminar.setFont(new java.awt.Font("Comic Book", 0, 14)); // NOI18N
-        labelEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEliminar.setText("Eliminar");
-        labelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelEliminarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelEliminarLayout = new javax.swing.GroupLayout(panelEliminar);
-        panelEliminar.setLayout(panelEliminarLayout);
-        panelEliminarLayout.setHorizontalGroup(
-            panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEliminarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelEliminarLayout.setVerticalGroup(
-            panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEliminarLayout.createSequentialGroup()
-                .addComponent(labelEliminar)
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        panelRegistroUsuario.add(panelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 20));
+        panelRegistroUsuario.add(panelAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, 20));
 
         getContentPane().add(panelRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 500, 280));
 
@@ -284,16 +224,10 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_labelSalirMouseClicked
 
     private void labelAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAtrasMouseClicked
-        A_ControlAcceso newframe = new A_ControlAcceso();
+        C_EditarUsuario newframe = new C_EditarUsuario();
         newframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_labelAtrasMouseClicked
-
-    private void labelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEliminarMouseClicked
-        C_EliminarUsuario nf = new C_EliminarUsuario();
-        nf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_labelEliminarMouseClicked
 
     private void clickAñadir(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAñadir
         if(inputNombre.getText().trim().isEmpty()){
@@ -302,7 +236,7 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Rellene los apellidos", "Error", JOptionPane.WARNING_MESSAGE);
         }else if (inputCorreo.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el correo", "Error", JOptionPane.WARNING_MESSAGE); 
-        }else if (inputContraseña.getPassword().length == 0){
+        }else if (inputContraseña.getPassword().length == 0 | inputContraseña.getPassword().equals("jPasswordField1")){
             JOptionPane.showMessageDialog(null, "Rellene la contraseña", "Error", JOptionPane.WARNING_MESSAGE);
         }else if (inputUsuario.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene el nombre de usuario", "Error", JOptionPane.WARNING_MESSAGE);
@@ -310,7 +244,10 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
             Usuario usuario = getInformacion();
             ManejoJSON.guardarJSON(usuario, Usuario.RUTA);
             limpiarInputs();
-            JOptionPane.showMessageDialog(null, "Usuario agregado");
+            JOptionPane.showMessageDialog(null, "Usuario modificado correctamente");
+            B_RegistroUsuario nf = new B_RegistroUsuario();
+            nf.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_clickAñadir
 
@@ -319,14 +256,8 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUsuarioFocusLost
 
     private void inputUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseClicked
-        inputUsuario.setText("");
-    }//GEN-LAST:event_inputUsuarioMouseClicked
 
-    private void labelEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEditarMouseClicked
-        C_EditarUsuario nf = new C_EditarUsuario();
-        nf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_labelEditarMouseClicked
+    }//GEN-LAST:event_inputUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -345,20 +276,21 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(B_RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C_EditarUsuarioAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(B_RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C_EditarUsuarioAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(B_RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C_EditarUsuarioAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(B_RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C_EditarUsuarioAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new B_RegistroUsuario().setVisible(true);
+                new C_EditarUsuarioAux().setVisible(true);
             }
         });
     }
@@ -379,8 +311,6 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel labelAñadir;
     private javax.swing.JLabel labelContraseña;
     private javax.swing.JLabel labelCorreo;
-    private javax.swing.JLabel labelEditar;
-    private javax.swing.JLabel labelEliminar;
     private javax.swing.JLabel labelFondo;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelRegistroUsuario;
@@ -388,8 +318,6 @@ public class B_RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel labelUsuario;
     private javax.swing.JPanel panelAtras;
     private javax.swing.JPanel panelAñadir;
-    private javax.swing.JPanel panelEditar;
-    private javax.swing.JPanel panelEliminar;
     private javax.swing.JPanel panelRegistroUsuario;
     private javax.swing.JPanel panelSalir;
     // End of variables declaration//GEN-END:variables
